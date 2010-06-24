@@ -34,7 +34,7 @@ function Ephemerids_userapi_getall($args)
         $args['language'] = null;
     }
     if (!isset($args['order'])) {
-        $args['order'] = 'eid';
+        $args['order'] = 'mid, did, yid, eid'; # appropriate order, NP
     }
 
     $items = array();

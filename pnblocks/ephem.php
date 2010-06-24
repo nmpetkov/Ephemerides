@@ -50,7 +50,11 @@ function Ephemerids_ephemblock_display($blockinfo)
     // Create output object
     $Renderer = & Renderer::getInstance('Ephemerids');
 
-    $Renderer->assign('items', ModUtil::apiFunc('Ephemerids', 'user', 'gettoday'));
+    $items = ModUtil::apiFunc('Ephemerids', 'user', 'gettoday');
+    if (!$items) { 
+    	return '';	# do not display empty block, NP
+    }
+    $Renderer->assign('items', $items);
 
     // Populate block info and pass to theme
     $blockinfo['content'] = $Renderer->fetch('ephemerids_block_ephem.htm');

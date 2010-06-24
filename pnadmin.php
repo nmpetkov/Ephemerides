@@ -315,7 +315,8 @@ function Ephemerids_admin_view()
                 if ($item['yid'] < 1970) {
                     $item['yid'] = 1970;
                 }
-                $items[$k]['datetime'] = DateUtil::formatDatetime(mktime(0, 0, 0, $item['mid'], $item['did'], $item['yid']), 'datelong');
+                //$items[$k]['datetime'] = DateUtil::formatDatetime(mktime(0, 0, 0, $item['mid'], $item['did'], $item['yid']), 'datelong');
+                $items[$k]['datetime'] = DateUtil::formatDatetime(mktime(12, 0, 0, $item['mid'], $item['did'], $item['yid']), 'datelong'); # bug corrected, NP
             }
         }
     }
