@@ -29,14 +29,16 @@ function Ephemerids_pntables()
                                       'mid'       => 'pn_mid',
                                       'yid'       => 'pn_yid',
                                       'content'   => 'pn_content',
-                                      'language'  => 'pn_language');
+                                      'language'  => 'pn_language',
+                                      'status'    => 'pn_status');
 
     $pntable['ephem_column_def'] = array('eid'      => 'I NOTNULL AUTO PRIMARY',
                                          'did'      => "I1 NOTNULL DEFAULT '0'",
                                          'mid'      => "I1 NOTNULL DEFAULT '0'",
                                          'yid'      => "I2 NOTNULL DEFAULT '0'",
                                          'content'  => 'X NOTNULL',
-                                         'language' => "C(30) NOTNULL DEFAULT ''");
+                                         'language' => "C(30) NOTNULL DEFAULT ''",
+                                         'status'   => "I1 DEFAULT '1'");
 
     // add standard data fields
     ObjectUtil::addStandardFieldsToTableDefinition ($pntable['ephem_column'], 'pn_');

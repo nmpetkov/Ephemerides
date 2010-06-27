@@ -18,7 +18,7 @@ $modversion['displayname']    = __('Ephemerids', $dom);
 $modversion['description']    = __('Provides a block displaying an information byte (historical event, thought for the day, etc.) linked to the day\'s date, with daily roll-over, and incorporates an interface for adding, editing and maintaining ephemerids.', $dom);
 //! module name that appears in URL
 $modversion['url']            = __('ephemerids', $dom);
-$modversion['version']        = '1.7';
+$modversion['version']        = '1.8';
 
 $modversion['credits']        = '';
 $modversion['help']           = '';

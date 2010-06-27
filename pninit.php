@@ -55,6 +55,10 @@ function Ephemerids_upgrade($oldversion)
             ephemerids_upgrade_updateEphemeridsLanguages();
 
         case '1.7':
+            // needs update of table, added status column (see in front of this function)
+            // DBUtil::changeTable('ephem')
+
+        case '1.8':
             // future upgrade routines
     }
 
