@@ -18,6 +18,7 @@
  * @param 'yid' the year of the emphererid
  * @param 'content' the ephmerid description
  * @param 'language' the language of the ephemerid
+ * @param 'status' the status of the ephemerid
  * @return mixed Ephemerids item ID on success, false on failure
  */
 function Ephemerids_adminapi_create($args)
@@ -33,6 +34,7 @@ function Ephemerids_adminapi_create($args)
         (!isset($args['language']))) {
         return LogUtil::registerArgsError();
     }
+    if (!isset($args['status'])) $args['status'] = 1;
 
     // Security check
     if (!SecurityUtil::checkPermission('Ephemerids::', '::', ACCESS_ADD)) {
@@ -43,7 +45,8 @@ function Ephemerids_adminapi_create($args)
                   'mid' => $args['mid'],
                   'yid' => $args['yid'],
                   'content' => $args['content'],
-                  'language' => $args['language']);
+                  'language' => $args['language'],
+                  'status' => $args['status']);
 
     if (!DBUtil::insertObject($item, 'ephem', 'eid')) {
         return LogUtil::registerError(__('Error! Could not create the new ephemerid.', $dom));
@@ -104,6 +107,7 @@ function Ephemerids_adminapi_delete($args)
  * @param $args['yid'] the year of the ephemerid
  * @param $args['content'] the event description
  * @param $args['language'] the language of the item
+ * @param $args['status'] the status of the item
  * @return bool true on update success, false on failiure
  */
 function Ephemerids_adminapi_update($args)
@@ -120,6 +124,7 @@ function Ephemerids_adminapi_update($args)
         (!isset($args['language']))) {
         return LogUtil::registerArgsError();
     }
+    if (!isset($args['status'])) $args['status'] = 1;
 
     // The user API function is called.
     $item = pnModAPIFunc('Ephemerids', 'user', 'get', array('eid' => $args['eid']));
@@ -140,7 +145,8 @@ function Ephemerids_adminapi_update($args)
                   'mid' => $args['mid'],
                   'yid' => $args['yid'],
                   'content' => $args['content'],
-                  'language' => $args['language']);
+                  'language' => $args['language'],
+                  'status' => $args['status']);
 
     if (!DBUtil::updateObject($item, 'ephem', '', 'eid')) {
         return LogUtil::registerError(__('Error! Could not save your changes.', $dom));

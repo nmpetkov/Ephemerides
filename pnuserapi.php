@@ -136,6 +136,7 @@ function Ephemerids_userapi_gettoday()
     }
     $whereargs[] = "$columns[did]='" . DataUtil::formatForStore($eday) . "'";
     $whereargs[] = "$columns[mid]='" . DataUtil::formatForStore($emonth) . "'";
+    $whereargs[] = "$columns[status]='1'";
 
     $where = 'WHERE ' . implode(' AND ', $whereargs);
 

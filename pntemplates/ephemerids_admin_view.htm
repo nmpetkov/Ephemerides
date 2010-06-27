@@ -10,6 +10,7 @@
                 <th><!--[gt text="Date"]--></th>
                 <th><!--[gt text="Content"]--></th>
                 <th><!--[gt text="Internal ID"]--></th>
+                <th><!--[gt text="Status"]--></th>
                 <th><!--[gt text="Actions"]--></th>
             </tr>
         </thead>
@@ -19,6 +20,10 @@
                 <td><!--[$ephemerids[ephemerids].datetime|pnvarprepfordisplay]--></td>
                 <td><!--[$ephemerids[ephemerids].content|pnvarprepfordisplay]--></td>
                 <td><!--[$ephemerids[ephemerids].eid|pnvarprepfordisplay]--></td>
+                <td>
+                    <!--[if $ephemerids[ephemerids].status eq 0]--><strong><em><!--[gt text='Inactive']--></em></strong><!--[/if]-->
+                    <!--[if $ephemerids[ephemerids].status eq 1]--><!--[gt text='Active']--><!--[/if]-->
+                </td>
                 <td>
                     <!--[assign var="options" value=$ephemerids[ephemerids].options]-->
                     <!--[section name=options loop=$options]-->

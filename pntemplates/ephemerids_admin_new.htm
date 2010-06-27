@@ -25,6 +25,13 @@
                     <label for="ephemerids_content"><!--[gt text="Content"]--></label>
                     <textarea id="ephemerids_content" name="ephemerid[content]" cols="50" rows="8"></textarea>
                 </div>
+                <div class="z-formrow">
+                    <label for="ephemerids_status"><!--[gt text="Status"]--></label>
+                    <select name="ephemerid[status]" id="ephemerids_status">
+                        <option label="<!--[gt text="Active"]-->" value="1"<!--[if $status eq 1]--> selected="selected"<!--[/if]-->><!--[gt text="Active"]--></option>
+                        <option label="<!--[gt text="Inactive"]-->" value="0"<!--[if $status eq 0]--> selected="selected"<!--[/if]-->><!--[gt text="Inactive"]--></option>
+                    </select>
+                </div>
             </fieldset>
             <!--[pnmodcallhooks hookobject=item hookaction=new module=Ephemerids]-->
             <div class="z-formbuttons">
