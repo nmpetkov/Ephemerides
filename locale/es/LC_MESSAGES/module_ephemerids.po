@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ephemerids\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-03 11:42-0500\n"
-"PO-Revision-Date: 2010-04-07 23:20-0300\n"
-"Last-Translator: Mateo Tibaquirá <mateo@zikula.org>\n"
+"POT-Creation-Date: 2010-06-30 10:50+0000\n"
+"PO-Revision-Date: 2010-06-30 17:27+0200\n"
+"Last-Translator: Nikolay Petkov <nik@osi.bg>\n"
 "Language-Team: zikula.es <equipo@zikula.es>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,49 +19,35 @@ msgstr ""
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: pnadmin.php:99
+#: pnadmin.php:102
 msgid "Done! Ephemerid created."
 msgstr "Hecho! Efeméride creada."
 
-#: pnadmin.php:128
-#: pnadmin.php:228
+#: pnadmin.php:131
+#: pnadmin.php:233
 msgid "No such ephemerid found."
 msgstr "No se ha encontrado esta efeméride."
 
-#: pnadmin.php:190
+#: pnadmin.php:195
 msgid "Done! Ephemerid updated."
 msgstr "Hecho! Efeméride actualizada."
 
-#: pnadmin.php:261
+#: pnadmin.php:266
 msgid "Done! Ephemerid deleted."
 msgstr "Hecho! Efeméride borrada."
 
-#: pnadmin.php:306
+#: pnadmin.php:311
 msgid "Edit"
 msgstr "Editar"
 
-#: pnadmin.php:310
+#: pnadmin.php:315
 #: pntemplates/ephemerids_admin_delete.htm:16
 msgid "Delete"
 msgstr "Borrar"
 
-#: pnadmin.php:382
+#: pnadmin.php:389
 msgid "Done! Saved module configuration."
 msgstr "Hecho! Configuración del módulo actualizada."
-
-#: pnuserapi.php:63
-#: pnuserapi.php:150
-msgid "Error! Could not load any ephemerids."
-msgstr "Error!. No se pudo cargar ninguna efeméride."
-
-#: pnblocks/ephem.php:31
-#: pntemplates/ephemerids_admin_menu.htm:4
-msgid "Ephemerids"
-msgstr "Efemérides"
-
-#: pnblocks/ephem.php:32
-msgid "Ephemerid"
-msgstr "Efeméride"
 
 #: pnversion.php:17
 msgid "Ephemerids "
@@ -76,37 +62,51 @@ msgstr "Proporciona un bloque de muestra de información (hecho histórico, pens
 msgid "ephemerids"
 msgstr "efemerides"
 
-#: pnadminapi.php:49
+#: pnuserapi.php:63
+#: pnuserapi.php:151
+msgid "Error! Could not load any ephemerids."
+msgstr "Error!. No se pudo cargar ninguna efeméride."
+
+#: pnblocks/ephem.php:31
+#: pntemplates/ephemerids_admin_menu.htm:4
+msgid "Ephemerids"
+msgstr "Efemérides"
+
+#: pnblocks/ephem.php:32
+msgid "Ephemerid"
+msgstr "Efeméride"
+
+#: pnadminapi.php:52
 msgid "Error! Could not create the new ephemerid."
 msgstr "Error! No es posible el crear la nueva efeméride."
 
-#: pnadminapi.php:79
+#: pnadminapi.php:82
 msgid "No such ephemerid found"
 msgstr "No se ha encontrado tal efeméride"
 
-#: pnadminapi.php:88
+#: pnadminapi.php:91
 msgid "Error! Could not delete the ephemerid."
 msgstr "Error! No es posible el borrar la efeméride."
 
-#: pnadminapi.php:128
+#: pnadminapi.php:133
 msgid "Error! No such ephemerid found"
 msgstr "Error! No se ha encontrado tal efeméride"
 
-#: pnadminapi.php:146
+#: pnadminapi.php:152
 msgid "Error! Could not save your changes."
 msgstr "Error! No fue posible grabar los cambios."
 
-#: pnadminapi.php:170
+#: pnadminapi.php:176
 #: pntemplates/ephemerids_admin_view.htm:3
 msgid "Ephemerids list"
 msgstr "Lista de efemérides"
 
-#: pnadminapi.php:173
+#: pnadminapi.php:179
 #: pntemplates/ephemerids_admin_new.htm:3
 msgid "Create new ephemerid"
 msgstr "Crear nueva efeméride"
 
-#: pnadminapi.php:176
+#: pnadminapi.php:182
 #: pntemplates/ephemerids_admin_modifyconfig.htm:4
 #: pntemplates/ephemerids_admin_modifyconfig.htm:5
 msgid "Settings"
@@ -121,27 +121,63 @@ msgid "Items per page in admin panel list view"
 msgstr "Elementos por página en la lista de panel de administración"
 
 #: pntemplates/ephemerids_admin_modifyconfig.htm:18
-#: pntemplates/ephemerids_admin_modify.htm:32
-#: pntemplates/ephemerids_admin_new.htm:31
+#: pntemplates/ephemerids_admin_modify.htm:39
+#: pntemplates/ephemerids_admin_new.htm:38
 msgid "Save"
 msgstr "Guardar"
 
 #: pntemplates/ephemerids_admin_modifyconfig.htm:19
-#: pntemplates/ephemerids_admin_modify.htm:33
-#: pntemplates/ephemerids_admin_new.htm:32
+#: pntemplates/ephemerids_admin_modify.htm:40
+#: pntemplates/ephemerids_admin_new.htm:39
 #: pntemplates/ephemerids_admin_delete.htm:17
 msgid "Cancel"
 msgstr "Cancelar"
 
+#: pntemplates/ephemerids_admin_view.htm:10
+#: pntemplates/ephemerids_admin_modify.htm:14
+#: pntemplates/ephemerids_admin_new.htm:13
+msgid "Date"
+msgstr "Fecha"
+
+#: pntemplates/ephemerids_admin_view.htm:11
+#: pntemplates/ephemerids_admin_modify.htm:26
+#: pntemplates/ephemerids_admin_new.htm:25
+msgid "Content"
+msgstr "Contenido"
+
+#: pntemplates/ephemerids_admin_view.htm:12
+msgid "Internal ID"
+msgstr "ID interno"
+
+#: pntemplates/ephemerids_admin_view.htm:13
+#: pntemplates/ephemerids_admin_modify.htm:30
+#: pntemplates/ephemerids_admin_new.htm:29
+msgid "Status"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:14
+msgid "Actions"
+msgstr "Acciones"
+
+#: pntemplates/ephemerids_admin_view.htm:24
+#: pntemplates/ephemerids_admin_modify.htm:33
+#: pntemplates/ephemerids_admin_new.htm:32
+msgid "Inactive"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:25
+#: pntemplates/ephemerids_admin_modify.htm:32
+#: pntemplates/ephemerids_admin_new.htm:31
+msgid "Active"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:35
+msgid "No items found."
+msgstr "No se han encontrado elementos."
+
 #: pntemplates/ephemerids_admin_modify.htm:3
 msgid "Edit ephemerid"
 msgstr "Editar la efeméride"
-
-#: pntemplates/ephemerids_admin_modify.htm:14
-#: pntemplates/ephemerids_admin_new.htm:13
-#: pntemplates/ephemerids_admin_view.htm:10
-msgid "Date"
-msgstr "Fecha"
 
 #: pntemplates/ephemerids_admin_modify.htm:16
 #: pntemplates/ephemerids_admin_new.htm:15
@@ -153,27 +189,9 @@ msgstr "El año no puede ser inferior a la fecha Unix (1970) o se reestablecerá
 msgid "Language"
 msgstr "Idioma"
 
-#: pntemplates/ephemerids_admin_modify.htm:26
-#: pntemplates/ephemerids_admin_new.htm:25
-#: pntemplates/ephemerids_admin_view.htm:11
-msgid "Content"
-msgstr "Contenido"
-
 #: pntemplates/ephemerids_admin_new.htm:11
 msgid "New ephemerid"
 msgstr "Nueva efeméride"
-
-#: pntemplates/ephemerids_admin_view.htm:12
-msgid "Internal ID"
-msgstr "ID interno"
-
-#: pntemplates/ephemerids_admin_view.htm:13
-msgid "Actions"
-msgstr "Acciones"
-
-#: pntemplates/ephemerids_admin_view.htm:30
-msgid "No items found."
-msgstr "No se han encontrado elementos."
 
 #: pntemplates/ephemerids_admin_delete.htm:3
 msgid "Delete ephemerid"
