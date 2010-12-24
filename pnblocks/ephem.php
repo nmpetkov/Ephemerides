@@ -58,6 +58,16 @@ function Ephemerids_ephemblock_display($blockinfo)
 
     // Populate block info and pass to theme
     $blockinfo['content'] = $pnRender->fetch('ephemerids_block_ephem.htm');
+    
+    // loop to see if we have items of type=1 (events), if not - not to put title to the block (holidays only)
+    $have_events = false;
+    foreach ($items as $item) {
+    	if ($item[type]==1) {
+    		$have_events = true;
+    		break;
+    	}
+    }
+    if (!$have_events) $blockinfo['title'] = "";
 
     return pnBlockThemeBlock($blockinfo);
 }

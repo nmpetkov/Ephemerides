@@ -7,22 +7,31 @@
     <table class="z-admintable">
         <thead>
             <tr>
-                <th><!--[gt text="Date"]--></th>
+                <th><!--[gt text="Month"]--></th>
+                <th><!--[gt text="Day"]--></th>
+                <th><!--[gt text="Year"]--></th>
                 <th><!--[gt text="Content"]--></th>
                 <th><!--[gt text="Internal ID"]--></th>
                 <th><!--[gt text="Status"]--></th>
+                <th><!--[gt text="Type"]--></th>
                 <th><!--[gt text="Actions"]--></th>
             </tr>
         </thead>
         <tbody>
             <!--[section name=ephemerids loop=$ephemerids]-->
-            <tr class="<!--[cycle values='z-odd,z-even']-->">
-                <td><!--[$ephemerids[ephemerids].datetime|pnvarprepfordisplay]--></td>
-                <td><!--[$ephemerids[ephemerids].content|pnvarprepfordisplay]--></td>
-                <td><!--[$ephemerids[ephemerids].eid|pnvarprepfordisplay]--></td>
+            <tr class="<!--[cycle values='z-odd,z-even']-->" style="vertical-align: top">
+                <td><!--[$ephemerids[ephemerids].mid]--></td>
+                <td><!--[$ephemerids[ephemerids].did]--></td>
+                <td><!--[if $ephemerids[ephemerids].yid]--><!--[$ephemerids[ephemerids].yid]--><!--[/if]--></td>
+                <td><!--[$ephemerids[ephemerids].content]--></td>
+                <td><!--[$ephemerids[ephemerids].eid]--></td>
                 <td>
                     <!--[if $ephemerids[ephemerids].status eq 0]--><strong><em><!--[gt text='Inactive']--></em></strong><!--[/if]-->
                     <!--[if $ephemerids[ephemerids].status eq 1]--><!--[gt text='Active']--><!--[/if]-->
+                </td>
+                <td>
+                    <!--[if $ephemerids[ephemerids].type eq 1]--><!--[gt text='Event']--><!--[/if]-->
+                    <!--[if $ephemerids[ephemerids].type eq 2]--><!--[gt text='Holiday']--><!--[/if]-->
                 </td>
                 <td>
                     <!--[assign var="options" value=$ephemerids[ephemerids].options]-->

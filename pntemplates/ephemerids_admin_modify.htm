@@ -33,6 +33,13 @@
                         <option label="<!--[gt text="Inactive"]-->" value="0"<!--[if $status eq 0]--> selected="selected"<!--[/if]-->><!--[gt text="Inactive"]--></option>
                     </select>
                 </div>
+                <div class="z-formrow">
+                    <label for="ephemerids_type"><!--[gt text="Type"]--></label>
+                    <select name="ephemerid[type]" id="ephemerids_type">
+                        <option value="1"<!--[if $type eq 1]--> selected="selected"<!--[/if]-->><!--[gt text="Event"]--> (<!--[gt text="connected to given year"]-->)</option>
+                        <option value="2"<!--[if $type eq 2]--> selected="selected"<!--[/if]-->><!--[gt text="Holiday"]--> (<!--[gt text="not connected to given year, no block title"]-->)</option>
+                    </select>
+                </div>
             </fieldset>
             <!--[pnmodcallhooks hookobject=item hookaction=modify hookid=$eid module=Ephemerids]-->
             <div class="z-formbuttons">

@@ -59,6 +59,10 @@ function Ephemerids_upgrade($oldversion)
             // DBUtil::changeTable('ephem')
 
         case '1.8':
+            // needs update of table, added type column (see in front of this function)
+            // DBUtil::changeTable('ephem')
+
+        case '1.9':
             // future upgrade routines
     }
 

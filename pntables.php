@@ -30,7 +30,8 @@ function Ephemerids_pntables()
                                       'yid'       => 'pn_yid',
                                       'content'   => 'pn_content',
                                       'language'  => 'pn_language',
-                                      'status'    => 'pn_status');
+                                      'status'    => 'pn_status',
+                                      'type'      => 'pn_type');
 
     $pntable['ephem_column_def'] = array('eid'      => 'I NOTNULL AUTO PRIMARY',
                                          'did'      => "I1 NOTNULL DEFAULT '0'",
@@ -38,7 +39,8 @@ function Ephemerids_pntables()
                                          'yid'      => "I2 NOTNULL DEFAULT '0'",
                                          'content'  => 'X NOTNULL',
                                          'language' => "C(30) NOTNULL DEFAULT ''",
-                                         'status'   => "I1 DEFAULT '1'");
+                                         'status'   => "I1 DEFAULT '1'",
+                                         'type'     => "I1 DEFAULT '1'");
 
     // add standard data fields
     ObjectUtil::addStandardFieldsToTableDefinition ($pntable['ephem_column'], 'pn_');
