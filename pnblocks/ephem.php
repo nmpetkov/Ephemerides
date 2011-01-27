@@ -90,7 +90,7 @@ function ephemerids_ephemblock_display($blockinfo)
 	    // loop to see if we have items of type=1 (events), if not - not to put title to the block (holidays only)
 	    $have_events = false;
 	    foreach ($items as $item) {
-	    	if ($item[type]==1) {
+	    	if ($item['type']==1) {
 	    		$have_events = true;
 	    		break;
 	    	}
