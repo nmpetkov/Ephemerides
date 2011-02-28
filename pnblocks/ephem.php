@@ -70,9 +70,9 @@ function ephemerids_ephemblock_display($blockinfo)
 			$diff = ($now - $file_time);
 			if ($diff <= $cache_time) {
 			    $content = file_get_contents($cachefile);
-			}
-			if (file_exists($cachefile_title)) {
-				$title = file_get_contents($cachefile_title);
+				if (file_exists($cachefile_title)) {
+					$title = file_get_contents($cachefile_title);
+				}
 			}
 		}
 		if (empty($content)) $write_to_cache = true; # not loaded, flag to write to cache later
