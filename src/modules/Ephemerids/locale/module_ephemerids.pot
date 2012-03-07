@@ -1,0 +1,244 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Zikula 1.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-27 16:40+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: pnadmin.php:105
+msgid "Done! Ephemerid created."
+msgstr ""
+
+#: pnadmin.php:134 pnadmin.php:238
+msgid "No such ephemerid found."
+msgstr ""
+
+#: pnadmin.php:200
+msgid "Done! Ephemerid updated."
+msgstr ""
+
+#: pnadmin.php:271
+msgid "Done! Ephemerid deleted."
+msgstr ""
+
+#: pnadmin.php:316
+msgid "Edit"
+msgstr ""
+
+#: pnadmin.php:320 pntemplates/ephemerids_admin_delete.htm:16
+msgid "Delete"
+msgstr ""
+
+#: pnadmin.php:394
+msgid "Done! Saved module configuration."
+msgstr ""
+
+#: pnversion.php:17
+msgid "Ephemerids "
+msgstr ""
+
+#: pnversion.php:18
+msgid ""
+"Provides a block displaying an information byte (historical event, thought "
+"for the day, etc.) linked to the day's date, with daily roll-over, and "
+"incorporates an interface for adding, editing and maintaining ephemerids."
+msgstr ""
+
+#. ! module name that appears in URL
+#: pnversion.php:20
+msgid "ephemerids"
+msgstr ""
+
+#: pnuserapi.php:63 pnuserapi.php:151
+msgid "Error! Could not load any ephemerids."
+msgstr ""
+
+#: pnblocks/ephem.php:30 pntemplates/ephemerids_admin_menu.htm:4
+msgid "Ephemerids"
+msgstr ""
+
+#: pnblocks/ephem.php:31
+msgid "Ephemerid"
+msgstr ""
+
+#: pnadminapi.php:55
+msgid "Error! Could not create the new ephemerid."
+msgstr ""
+
+#: pnadminapi.php:85
+msgid "No such ephemerid found"
+msgstr ""
+
+#: pnadminapi.php:94
+msgid "Error! Could not delete the ephemerid."
+msgstr ""
+
+#: pnadminapi.php:138
+msgid "Error! No such ephemerid found"
+msgstr ""
+
+#: pnadminapi.php:158
+msgid "Error! Could not save your changes."
+msgstr ""
+
+#: pnadminapi.php:182 pntemplates/ephemerids_admin_view.htm:3
+msgid "Ephemerids list"
+msgstr ""
+
+#: pnadminapi.php:185 pntemplates/ephemerids_admin_new.htm:3
+msgid "Create new ephemerid"
+msgstr ""
+
+#: pnadminapi.php:188 pntemplates/ephemerids_admin_modifyconfig.htm:4
+#: pntemplates/ephemerids_admin_modifyconfig.htm:5
+msgid "Settings"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_modifyconfig.htm:10
+msgid "General settings"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_modifyconfig.htm:12
+msgid "Items per page in admin panel list view"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_modifyconfig.htm:18
+#: pntemplates/ephemerids_admin_modify.htm:46
+#: pntemplates/ephemerids_admin_new.htm:45
+msgid "Save"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_modifyconfig.htm:19
+#: pntemplates/ephemerids_admin_modify.htm:47
+#: pntemplates/ephemerids_admin_new.htm:46
+#: pntemplates/ephemerids_admin_delete.htm:17
+msgid "Cancel"
+msgstr ""
+
+#: pntemplates/ephemerids_block_ephem_modify.htm:3
+msgid "Cache time (enter positive number in seconds to enable cache)"
+msgstr ""
+
+#: pntemplates/ephemerids_block_ephem_modify.htm:7
+msgid "Cache directory name (within Zikula Temp directory)"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:10
+msgid "Month"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:11
+msgid "Day"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:12
+msgid "Year"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:13
+#: pntemplates/ephemerids_admin_modify.htm:26
+#: pntemplates/ephemerids_admin_new.htm:25
+msgid "Content"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:14
+msgid "Internal ID"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:15
+#: pntemplates/ephemerids_admin_modify.htm:30
+#: pntemplates/ephemerids_admin_new.htm:29
+msgid "Status"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:16
+#: pntemplates/ephemerids_admin_modify.htm:37
+#: pntemplates/ephemerids_admin_new.htm:36
+msgid "Type"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:17
+msgid "Actions"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:29
+#: pntemplates/ephemerids_admin_modify.htm:33
+#: pntemplates/ephemerids_admin_new.htm:32
+msgid "Inactive"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:30
+#: pntemplates/ephemerids_admin_modify.htm:32
+#: pntemplates/ephemerids_admin_new.htm:31
+msgid "Active"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:33
+#: pntemplates/ephemerids_admin_modify.htm:39
+#: pntemplates/ephemerids_admin_new.htm:38
+msgid "Event"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:34
+#: pntemplates/ephemerids_admin_modify.htm:40
+#: pntemplates/ephemerids_admin_new.htm:39
+msgid "Holiday"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_view.htm:44
+msgid "No items found."
+msgstr ""
+
+#: pntemplates/ephemerids_admin_modify.htm:3
+msgid "Edit ephemerid"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_modify.htm:14
+#: pntemplates/ephemerids_admin_new.htm:13
+msgid "Date"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_modify.htm:16
+#: pntemplates/ephemerids_admin_new.htm:15
+msgid ""
+"The year can't be lower than the unix epoch one (1970) or will be reseted to "
+"1970 for formatting purposes."
+msgstr ""
+
+#: pntemplates/ephemerids_admin_modify.htm:21
+#: pntemplates/ephemerids_admin_new.htm:20
+msgid "Language"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_modify.htm:39
+#: pntemplates/ephemerids_admin_new.htm:38
+msgid "connected to given year"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_modify.htm:40
+#: pntemplates/ephemerids_admin_new.htm:39
+msgid "not connected to given year, no block title"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_new.htm:11
+msgid "New ephemerid"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_delete.htm:3
+msgid "Delete ephemerid"
+msgstr ""
+
+#: pntemplates/ephemerids_admin_delete.htm:7
+msgid "Do you really want to delete this ephemerid?"
+msgstr ""
