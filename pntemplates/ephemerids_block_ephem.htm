@@ -1,7 +1,0 @@
-{*  $Id: ephemerids_block_ephem.htm 420 2010-06-14 04:56:34Z drak $  *}
-{section name=ephemerids loop=$items}
-<div class="ephemerids_block">
-    <h3>{$items[ephemerids].yid|varprepfordisplay}</h3>
-    {$items[ephemerids].content|nl2br|modcallhooks:"Ephemerids"|varprephtmldisplay}
-</div>
-{/section}
