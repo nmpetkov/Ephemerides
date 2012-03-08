@@ -1,5 +1,6 @@
 {gt text="Ephemerides list" assign='templatetitle'}
 {include file="ephemerids_admin_menu.tpl"}
+
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='filenew.gif' set='icons/large' alt=$templatetitle}</div>
     <h2>{$templatetitle}</h2>
@@ -49,6 +50,9 @@
                 <th>{gt text="Day"}</th>
                 <th>{gt text="Year"}</th>
                 <th>{gt text="Content"}</th>
+                {if $enablecategorization}
+                <th>{gt text='Category'}</th>
+                {/if}
                 <th>{gt text="Internal ID"}</th>
                 <th>{gt text="Status"}</th>
                 <th>{gt text="Type"}</th>
@@ -62,6 +66,11 @@
                 <td>{$ephemeride.did}</td>
                 <td>{if $ephemeride.yid}{$ephemeride.yid}{/if}</td>
                 <td>{$ephemeride.content}</td>
+                {if $enablecategorization}
+                <td>
+                    {assignedcategorieslist item=$ephemeride}
+                </td>
+                {/if}
                 <td>{$ephemeride.eid}</td>
                 <td>
                     {if $ephemeride.status eq 0}<strong><em>{gt text='Inactive'}</em></strong>{/if}

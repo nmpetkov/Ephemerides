@@ -32,7 +32,7 @@ function Ephemerids_tables()
 									 'type'     => "I1 DEFAULT '1'");
 
 	// enable categorization services
-	$tables['ephem_db_extra_enable_categorization'] = ModUtil::getVar('Ephemerids', 'enablecategorization', false);
+	$tables['ephem_db_extra_enable_categorization'] = ModUtil::getVar('Ephemerids', 'enablecategorization', true);
 	$tables['ephem_primary_key_column'] = 'eid';
 
 	// add standard data fields

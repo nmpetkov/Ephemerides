@@ -69,7 +69,7 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
             $wheres[] = "content LIKE '%".DataUtil::formatForStore($args['keyword'])."%'";
         }
 
-        $args['where'] = implode (' AND ', $wheres);
+        $args['where'] = implode(' AND ', $wheres);
 
         return $args['where'];
     }
@@ -193,8 +193,9 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
 	/**
 	 * get all items for today
 	 * @return mixed array of items, or false on failure
+     * @param 'args['catFilter']' if exist category filter
 	 */
-	function gettoday()
+	function gettoday($args)
 	{
 		$items = array();
 
@@ -225,8 +226,19 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
 								  'instance_right' => 'eid',
 								  'level'          => ACCESS_READ));
 
+		$args['catFilter'] = array();
+        if (isset($args['category']) && !empty($args['category'])){
+            if (is_array($args['category'])) {
+                $args['catFilter'] = $args['category'];
+            } elseif (isset($args['property'])) {
+                $property = $args['property'];
+                $args['catFilter'][$property] = $args['category'];
+            }
+            $args['catFilter']['__META__'] = array('module' => 'Ephemerids');
+        }
+
 		// get the objects from the db
-		$items = DBUtil::selectObjectArray('ephem', $where, 'eid', -1, -1, '', $permFilter);
+		$items = DBUtil::selectObjectArray('ephem', $where, 'eid', -1, -1, '', $permFilter, $args['catFilter']);
 		if ($items === false) {
 			return LogUtil::registerError(__('Error! Could not load any ephemerides.'));
 		}

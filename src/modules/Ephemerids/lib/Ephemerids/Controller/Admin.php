@@ -18,7 +18,7 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
     public function main()
     {
         // security check
-        if (!SecurityUtil::checkPermission('Ephemerids::', '::', ACCESS_EDIT)) {
+        if (!SecurityUtil::checkPermission($this->name.'::', '::', ACCESS_EDIT)) {
             return LogUtil::registerPermissionError();
         }
 
@@ -36,17 +36,17 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
     public function newitem()
     {
         // security check
-        if (!SecurityUtil::checkPermission('Ephemerids::', '::', ACCESS_ADD)) {
+        if (!SecurityUtil::checkPermission($this->name.'::', '::', ACCESS_ADD)) {
             return LogUtil::registerPermissionError();
         }
 
         // get all module vars
-        $modvars = ModUtil::getVar('Ephemerids');
+        $modvars = ModUtil::getVar($this->name);
 
         $this->view->setCaching(false);
 
         if ($modvars['enablecategorization']) {
-            $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('Ephemerids', 'ephem');
+            $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories($this->name, 'ephem');
             $this->view->assign('catregistry', $catregistry);
         }
 		$this->view->assign('language', ZLanguage::getLanguageCode());
@@ -67,7 +67,7 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
     public function view($args)
     {
         // security check
-        if (!(SecurityUtil::checkPermission('Ephemerids::', '::', ACCESS_EDIT))) {
+        if (!(SecurityUtil::checkPermission($this->name.'::', '::', ACCESS_EDIT))) {
             return LogUtil::registerPermissionError();
         }
 
@@ -82,10 +82,10 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
         }
 
         // get all module vars
-        $modvars = ModUtil::getVar('Ephemerids');
+        $modvars = ModUtil::getVar($this->name);
 
         if ($modvars['enablecategorization']) {
-            $catregistry  = CategoryRegistryUtil::getRegisteredModuleCategories('Ephemerids', 'ephem');
+            $catregistry  = CategoryRegistryUtil::getRegisteredModuleCategories($this->name, 'ephem');
             $properties = array_keys($catregistry);
 
             // validate and build the category filter - mateo
@@ -106,7 +106,7 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
         }
 
        // get the matching ephemerides
-        $ephemerides = ModUtil::apiFunc('Ephemerids', 'user', 'getall',
+        $ephemerides = ModUtil::apiFunc($this->name, 'user', 'getall',
                 array('startnum' => $startnum,
                 'numitems' => $modvars['itemsperpage'],
                 'keyword'  => $keyword,
@@ -118,13 +118,13 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
         {
             // options for the item
             $options = array();
-            if (SecurityUtil::checkPermission('Ephemerids::', "::".$item['eid'], ACCESS_EDIT)) {
-                $ephemerides[$key]['options'][] = array('url'   => ModUtil::url('Ephemerids', 'admin', 'modify', array('eid' => $item['eid'])),
+            if (SecurityUtil::checkPermission($this->name.'::', "::".$item['eid'], ACCESS_EDIT)) {
+                $ephemerides[$key]['options'][] = array('url'   => ModUtil::url($this->name, 'admin', 'modify', array('eid' => $item['eid'])),
                         'image' => 'xedit.gif',
                         'title' => $this->__('Edit'));
 
-                if (SecurityUtil::checkPermission('Ephemerids::', "::".$item['eid'], ACCESS_DELETE)) {
-                    $ephemerides[$key]['options'][] = array('url'   => ModUtil::url('Ephemerids', 'admin', 'delete', array('eid' => $item['eid'])),
+                if (SecurityUtil::checkPermission($this->name.'::', "::".$item['eid'], ACCESS_DELETE)) {
+                    $ephemerides[$key]['options'][] = array('url'   => ModUtil::url($this->name, 'admin', 'delete', array('eid' => $item['eid'])),
                             'image' => '14_layer_deletelayer.gif',
                             'title' => $this->__('Delete'));
                 }
@@ -163,7 +163,7 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
 
         // assign the values for the smarty plugin to produce a pager
         $this->view->assign('pager', array('itemsperpage' => $modvars['itemsperpage'],
-                'numitems' => ModUtil::apiFunc('Ephemerids', 'user', 'countitems',
+                'numitems' => ModUtil::apiFunc($this->name, 'user', 'countitems',
                 array('keyword'  => $keyword,
                 'category' => isset($catFilter) ? $catFilter : null))));
 
@@ -189,22 +189,24 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
         }
 
         // get the item
-        $item = ModUtil::apiFunc('Ephemerids', 'user', 'get', array('eid' => $eid));
+        $item = ModUtil::apiFunc($this->name, 'user', 'get', array('eid' => $eid));
         if (!$item) {
             return DataUtil::formatForDisplayHTML($this->__('No such Ephemeride found.'));
         }
+		// calulate date for use in template
+		$item['date'] = $item['yid'] . '-' . $item['mid'] . '-' . $item['did'];
 
         // security check
-        if (!SecurityUtil::checkPermission('Ephemerids::', "$item[author]::$eid", ACCESS_EDIT)) {
+        if (!SecurityUtil::checkPermission($this->name.'::', "::$eid", ACCESS_EDIT)) {
             return LogUtil::registerPermissionError();
         }
 
         // get all module vars
-        $modvars = ModUtil::getVar('Ephemerids');
+        $modvars = ModUtil::getVar($this->name);
 
         if ($modvars['enablecategorization']) {
             // load the category registry util
-            $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('Ephemerids', 'ephem');
+            $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories($this->name, 'ephem');
 
             $this->view->assign('catregistry', $catregistry);
         }
@@ -235,13 +237,13 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
         }
 
         // get the item
-        $item = ModUtil::apiFunc('Ephemerids', 'user', 'get', array('eid' => $eid));
+        $item = ModUtil::apiFunc($this->name, 'user', 'get', array('eid' => $eid));
         if ($item == false) {
             return LogUtil::registerError ($this->__('No such Ephemeride found.'));
         }
 
         // security check
-        if (!SecurityUtil::checkPermission('Ephemerids::', $item['author'].'::'.$eid, ACCESS_DELETE)) {
+        if (!SecurityUtil::checkPermission($this->name.'::', '::'.$eid, ACCESS_DELETE)) {
             return LogUtil::registerPermissionError();
         }
 
@@ -265,13 +267,13 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
         $this->checkCsrfToken();
 
         // delete the item
-        if (ModUtil::apiFunc('Ephemerids', 'admin', 'delete', array('eid' => $eid))) {
+        if (ModUtil::apiFunc($this->name, 'admin', 'delete', array('eid' => $eid))) {
             LogUtil::registerStatus($this->__('Done! Ephemeride deleted.'));
         }
 
         // This function generated no output, and so now it is complete we redirect
         // the user to an appropriate page for them to carry on their work
-        return System::redirect(ModUtil::url('Ephemerids', 'admin', 'view'));
+        return System::redirect(ModUtil::url($this->name, 'admin', 'view'));
     }
 
     /**
@@ -282,13 +284,13 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
     public function modifyconfig()
     {
         // security check
-        if (!SecurityUtil::checkPermission('Ephemerids::', '::', ACCESS_ADMIN)) {
+        if (!SecurityUtil::checkPermission($this->name.'::', '::', ACCESS_ADMIN)) {
             return LogUtil::registerPermissionError();
         }
 
         $this->view->setCaching(false);
         // module variables
-        $this->view->assign(ModUtil::getVar('Ephemerids'));
+        $this->view->assign(ModUtil::getVar($this->name));
 
         // return the output that has been generated by this function
         return $this->view->fetch('ephemerids_admin_modifyconfig.tpl');
@@ -320,13 +322,13 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
 		
         // notable by its absence there is no security check here.
         // create the item
-        $eid = ModUtil::apiFunc('Ephemerids', 'admin', 'create', $ephemerid);
+        $eid = ModUtil::apiFunc($this->name, 'admin', 'create', $ephemerid);
         if ($eid != false) {
             // success
             LogUtil::registerStatus($this->__('Done! Ephemeride created.'));
         }
 
-        return System::redirect(ModUtil::url('Ephemerids', 'admin', 'view'));
+        return System::redirect(ModUtil::url($this->name, 'admin', 'view'));
     }
 
     /**
@@ -354,7 +356,7 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
 
         // notable by its absence there is no security check here.
         // update the ephemerid
-        if (ModUtil::apiFunc('Ephemerids', 'admin', 'update', array('eid' => $ephemerid['eid'],
+        if (ModUtil::apiFunc($this->name, 'admin', 'update', array('eid' => $ephemerid['eid'],
                           'did' => $ephemerid['Date_Day'],
                           'mid' => $ephemerid['Date_Month'],
                           'yid' => $ephemerid['Date_Year'],
@@ -368,7 +370,7 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
 
         // this function generated no output, and so now it is complete we redirect
         // the user to an appropriate page for them to carry on their work
-        return System::redirect(ModUtil::url('Ephemerids', 'admin', 'view'));
+        return System::redirect(ModUtil::url($this->name, 'admin', 'view'));
     }
 
     /**
@@ -393,6 +395,6 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
 
         // this function generated no output, and so now it is complete we redirect
         // the user to an appropriate page for them to carry on their work
-        return System::redirect(ModUtil::url('Ephemerids', 'admin', 'view'));
+        return System::redirect(ModUtil::url($this->name, 'admin', 'view'));
     }
 }

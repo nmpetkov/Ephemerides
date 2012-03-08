@@ -94,6 +94,13 @@ class Ephemerids_Installer extends Zikula_AbstractInstaller
 				if (!DBUtil::changeTable('ephem')) {
 					return "1.9";
 				}
+				// enable categorisation this module
+				ModUtil::setVar('Ephemerids', 'enablecategorization', true);
+				// create our default category
+				if (!$this->_createdefaultcategory()) {
+					LogUtil::registerStatus($this->$this->__('Warning! Could not create the default Ephemerides category tree. If you want to use categorisation with Ephemerides, register at least one property for the module in the Category Registry.'));
+					$modvars['enablecategorization'] = false;
+				}
             case '3.0.0':
 				// future upgrade routines
         }

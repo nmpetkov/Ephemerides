@@ -25,7 +25,7 @@ class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
 	 */
 	public function info()
 	{
-		return array('module' => 'Ephemerids',
+		return array('module' => $this->name,
 					 'text_type' => $this->__('Ephemeride'),
 					 'text_type_long' => $this->__('Ephemeride block'),
 					 'allow_multiple' => true,
@@ -47,8 +47,11 @@ class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
 		}
 		// Get current content
 		$vars = BlockUtil::varsFromContent($blockinfo['content']);
+		if (!isset($vars['category'])) {
+			$vars['category'] = null;
+		}
 		
-		// Implementation cached content
+		// Implementation cached content: @nikp
 		$enable_cache = true;
 		$write_to_cache = false;	# flag
 		$cache_time = 600; # seconds
@@ -79,9 +82,29 @@ class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
 		}
 		if (empty($content)) {
 			// Create output object
-			$items = ModUtil::apiFunc('Ephemerids', 'user', 'gettoday');
+			$apiargs = array();
+			$apiargs['status'] = 1;
+			// Make a category filter only if categorization is enabled
+			$enablecategorization = ModUtil::getVar($this->name, 'enablecategorization');
+			if ($enablecategorization) {
+				// load the categories system
+				if (!Loader::loadClass('CategoryRegistryUtil')) {
+					return LogUtil::registerError(__f('Error! Could not load [%s] class.'), 'CategoryRegistryUtil');
+				}
+				// Get the registrered categories for the module
+				$catregistry  = CategoryRegistryUtil::getRegisteredModuleCategories($this->name, 'ephem');
+				$this->view->assign('catregistry', $catregistry);
+				$apiargs['catregistry'] = $catregistry;
+				$apiargs['category'] = $vars['category'];
+			}
+			$this->view->assign('enablecategorization', $enablecategorization);
+			$this->view->assign($vars); // assign the block vars
+			if (!is_array($vars['category'])) $vars['category'] = array();
+			$this->view->assign('category', $vars['category']);
+			// get items
+			$items = ModUtil::apiFunc($this->name, 'user', 'gettoday', $apiargs);
 			if (!$items) { 
-				return '';	# do not display empty block, NP
+				return '';	# do not display empty block: @nikp
 			}
 			$this->view->assign('items', $items);
 			// Populate block info and pass to theme
@@ -135,19 +158,20 @@ class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
 		// Create output object
 		$this->view->caching = false; # Admin output changes often, we do not want caching
 		// Select categories only if enabled for the module
-		$enablecategorization = ModUtil::getVar('Ephemerids', 'enablecategorization');
+		$enablecategorization = ModUtil::getVar($this->name, 'enablecategorization');
 		if ($enablecategorization) {
 			// load the categories system
 			if (!Loader::loadClass('CategoryRegistryUtil')) {
 				return LogUtil::registerError(__f('Error! Could not load [%s] class.'), 'CategoryRegistryUtil');
 			}
 			// Get the registrered categories for the module
-			$catregistry  = CategoryRegistryUtil::getRegisteredModuleCategories('Ephemerids', 'ephem');
+			$catregistry  = CategoryRegistryUtil::getRegisteredModuleCategories($this->name, 'ephem');
 			$this->view->assign('catregistry', $catregistry);
 		}
 		$this->view->assign('enablecategorization', $enablecategorization);
-		// assign the vars
-		$this->view->assign($vars);
+		$this->view->assign($vars); // assign the block vars
+		if (!is_array($vars['category'])) $vars['category'] = array();
+		$this->view->assign('category', $vars['category']);
 		// return the output
 		return $this->view->fetch('ephemerids_block_ephemeride_modify.tpl');
 	}
