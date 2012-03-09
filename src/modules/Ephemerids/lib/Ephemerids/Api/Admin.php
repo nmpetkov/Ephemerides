@@ -72,10 +72,6 @@ class Ephemerids_Api_Admin extends Zikula_AbstractApi
         // delete any object category mappings for this item
         ObjectUtil::deleteObjectCategories($item, 'ephem', 'eid');
 
-        // let any hooks know that we have deleted an item.
-        $this->callHooks('item', 'delete', $args['eid'], array('module' => 'Ephemerids'));
-
-        // let the calling process know that we have finished successfully
         return true;
     }
 
@@ -111,25 +107,12 @@ class Ephemerids_Api_Admin extends Zikula_AbstractApi
 			return LogUtil::registerPermissionError();
 		}
 
-		$item = array('eid' => $args['eid'],
-                  'did' => $args['did'],
-                  'mid' => $args['mid'],
-                  'yid' => $args['yid'],
-                  'content' => $args['content'],
-                  'language' => $args['language'],
-                  'status' => $args['status'],
-                  'type' => $args['type']);
-
         // update the args and check return value for error
-        $res = DBUtil::updateObject($item, 'ephem', '', 'eid');
+        $res = DBUtil::updateObject($args, 'ephem', '', 'eid');
         if (!$res) {
             return LogUtil::registerError($this->__('Error! Ephemeride update failed.'));
         }
 
-        // new hook functions
-        ModUtil::callHooks('item', 'update', $args['eid'], array('module' => 'Ephemerids'));
-
-        // let the calling process know that we have finished successfully
         return true;
     }
 
@@ -143,13 +126,13 @@ class Ephemerids_Api_Admin extends Zikula_AbstractApi
         $links = array();
 
         if (SecurityUtil::checkPermission('Ephemerids::', '::', ACCESS_EDIT)) {
-            $links[] = array('url' => ModUtil::url('Ephemerids', 'admin', 'view'), 'text' => $this->__('View Ephemerides List'));
+            $links[] = array('url' => ModUtil::url('Ephemerids', 'admin', 'view'), 'text' => $this->__('Ephemerides list'), 'class' => 'z-icon-es-view');
         }
         if (SecurityUtil::checkPermission('Ephemerids::', '::', ACCESS_ADD)) {
-            $links[] = array('url' => ModUtil::url('Ephemerids', 'admin', 'newitem'), 'text' => $this->__('Create a Ephemeride'));
+            $links[] = array('url' => ModUtil::url('Ephemerids', 'admin', 'newitem'), 'text' => $this->__('Create ephemeride'), 'class' => 'z-icon-es-new');
         }
         if (SecurityUtil::checkPermission('Ephemerids::', '::', ACCESS_ADMIN)) {
-            $links[] = array('url' => ModUtil::url('Ephemerids', 'admin', 'modifyconfig'), 'text' => $this->__('Settings'));
+            $links[] = array('url' => ModUtil::url('Ephemerids', 'admin', 'modifyconfig'), 'text' => $this->__('Settings'), 'class' => 'z-icon-es-config');
         }
 
         return $links;

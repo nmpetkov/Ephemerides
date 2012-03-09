@@ -164,6 +164,7 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
         $this->view->assign('ephemerids_keyword', $keyword);
         $this->view->assign('sort', $sort);
         $this->view->assign('sortdir', $sortdir);
+		$this->view->assign('filter_active', (empty($keyword) && empty($category)) ? false : true);
 
         // assign the categories information if enabled
         if ($modvars['enablecategorization']) {
@@ -360,23 +361,20 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
         $this->checkCsrfToken();
 
         // get parameters from whatever input we need.
-    $ephemerid = FormUtil::getPassedValue('ephemerid', isset($args['ephemerid']) ? $args['ephemerid'] : null, 'POST');
+		$ephemerid = FormUtil::getPassedValue('ephemerid', isset($args['ephemerid']) ? $args['ephemerid'] : null, 'POST');
 
         // check to see if we have been passed $objectid, the generic item identifier.
         if (!empty($ephemerid['objectid'])) {
             $ephemerid['eid'] = $ephemerid['objectid'];
         }
+		// add date names as in table
+		$ephemerid['did'] = $ephemerid['Date_Day'];
+		$ephemerid['mid'] = $ephemerid['Date_Month'];
+		$ephemerid['yid'] = $ephemerid['Date_Year'];
 
         // notable by its absence there is no security check here.
         // update the ephemerid
-        if (ModUtil::apiFunc($this->name, 'admin', 'update', array('eid' => $ephemerid['eid'],
-                          'did' => $ephemerid['Date_Day'],
-                          'mid' => $ephemerid['Date_Month'],
-                          'yid' => $ephemerid['Date_Year'],
-                          'content' => $ephemerid['content'],
-                          'language' => isset($ephemerid['language']) ? $ephemerid['language'] : '',
-                          'status' => isset($ephemerid['status']) ? $ephemerid['status'] : '1',
-                          'type' => isset($ephemerid['type']) ? $ephemerid['type'] : '1'))) {
+        if (ModUtil::apiFunc($this->name, 'admin', 'update', $ephemerid)) {
             // success
             LogUtil::registerStatus($this->__('Done! Ephemeride updated.'));
         }
