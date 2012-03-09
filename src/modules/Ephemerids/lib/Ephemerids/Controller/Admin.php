@@ -70,15 +70,25 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
         if (!(SecurityUtil::checkPermission($this->name.'::', '::', ACCESS_EDIT))) {
             return LogUtil::registerPermissionError();
         }
-
         // Get parameters from whatever input we need.
         $startnum = FormUtil::getPassedValue('startnum', isset($args['startnum']) ? $args['startnum'] : null, 'GET');
         $keyword  = FormUtil::getPassedValue('ephemerids_keyword', isset($args['ephemerids_keyword']) ? $args['ephemerids_keyword'] : '', 'POST');
+        $keyword_GET  = FormUtil::getPassedValue('keyword', isset($args['keyword']) ? $args['keyword'] : '', 'GET');
+		if ($keyword_GET) $keyword = $keyword_GET;
         $property = FormUtil::getPassedValue('ephemerids_property', isset($args['ephemerids_property']) ? $args['ephemerids_property'] : null, 'POST');
+        $property_GET = FormUtil::getPassedValue("property", isset($args["property"]) ? $args["property"] : null, 'GET');
+		if ($property_GET) $property = $property_GET;
         $category = FormUtil::getPassedValue("ephemerids_{$property}_category", isset($args["ephemerids_{$property}_category"]) ? $args["ephemerids_{$property}_category"] : null, 'POST');
+        $category_GET = FormUtil::getPassedValue("category", isset($args["category"]) ? $args["category"] : null, 'GET');
+		if ($category_GET) $category = $category_GET;
         $clear    = FormUtil::getPassedValue('clear', false, 'POST');
         if ($clear) {
             $property = $category = $keyword = null;
+        }
+        $sort = FormUtil::getPassedValue('sort', $sort, 'GET');
+        $sortdir = FormUtil::getPassedValue('sortdir', $sortdir, 'GET');
+        if ($sortdir != 'ASC' && $sortdir != 'DESC') {
+                $sortdir = 'ASC';
         }
 
         // get all module vars
@@ -105,13 +115,14 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
             }
         }
 
-       // get the matching ephemerides
-        $ephemerides = ModUtil::apiFunc($this->name, 'user', 'getall',
-                array('startnum' => $startnum,
+		$filter = array('startnum' => $startnum, 'sort' => $sort, 'sortdir' => $sortdir,
                 'numitems' => $modvars['itemsperpage'],
                 'keyword'  => $keyword,
                 'category' => isset($catFilter) ? $catFilter : null,
-                'catregistry'  => isset($catregistry) ? $catregistry : null));
+                'catregistry'  => isset($catregistry) ? $catregistry : null);
+		
+       // get the matching ephemerides
+        $ephemerides = ModUtil::apiFunc($this->name, 'user', 'getall', $filter);
 
         $items = array();
         foreach ($ephemerides as $key => $item)
@@ -151,6 +162,8 @@ class Ephemerids_Controller_Admin extends Zikula_AbstractController
 
         // add the current filters
         $this->view->assign('ephemerids_keyword', $keyword);
+        $this->view->assign('sort', $sort);
+        $this->view->assign('sortdir', $sortdir);
 
         // assign the categories information if enabled
         if ($modvars['enablecategorization']) {

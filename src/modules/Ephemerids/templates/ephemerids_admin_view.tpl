@@ -46,16 +46,16 @@
     <table class="z-admintable">
         <thead>
             <tr>
-                <th>{gt text="Month"}</th>
-                <th>{gt text="Day"}</th>
-                <th>{gt text="Year"}</th>
-                <th>{gt text="Content"}</th>
+                <th>{sortlink __linktext='Month' sort='mid' currentsort=$sort sortdir=$sortdir modname='Ephemerids' type='admin' func='view' keyword=$ephemerids_keyword property=$property category=$category}</th>
+                <th>{sortlink __linktext='Day' sort='did' currentsort=$sort sortdir=$sortdir modname='Ephemerids' type='admin' func='view' keyword=$ephemerids_keyword property=$property category=$category}</th>
+                <th>{sortlink __linktext='Year' sort='yid' currentsort=$sort sortdir=$sortdir modname='Ephemerids' type='admin' func='view' keyword=$ephemerids_keyword property=$property category=$category}</th>
+                <th>{sortlink __linktext='Content' sort='content' currentsort=$sort sortdir=$sortdir modname='Ephemerids' type='admin' func='view' keyword=$ephemerids_keyword property=$property category=$category}</th>
                 {if $enablecategorization}
                 <th>{gt text='Category'}</th>
                 {/if}
-                <th>{gt text="Internal ID"}</th>
-                <th>{gt text="Status"}</th>
-                <th>{gt text="Type"}</th>
+                <th>{sortlink __linktext='Internal ID' sort='eid' currentsort=$sort sortdir=$sortdir modname='Ephemerids' type='admin' func='view' keyword=$ephemerids_keyword property=$property category=$category}</th>
+                <th>{sortlink __linktext='Status' sort='status' currentsort=$sort sortdir=$sortdir modname='Ephemerids' type='admin' func='view' keyword=$ephemerids_keyword property=$property category=$category}</th>
+                <th>{sortlink __linktext='Type' sort='type' currentsort=$sort sortdir=$sortdir modname='Ephemerids' type='admin' func='view' keyword=$ephemerids_keyword property=$property category=$category}</th>
                 <th>{gt text="Actions"}</th>
             </tr>
         </thead>

@@ -15,8 +15,7 @@
                     <div id="ephemerids_date">{html_select_date year_as_text=true time=$date field_array='ephemerid'}</div>
 					<p class="z-formnote z-warningmsg">{gt text="The year can't be lower than the unix epoch one (1970) or will be reseted to 1970 for formatting purposes."}</p>
                 </div>
-                {configgetvar name='multilingual' assign='multilingual'}
-                {if $multilingual}
+                {if $modvars.ZConfig.multilingual}
                 <div class="z-formrow">
                     <label for="ephemerids_language">{gt text='Language'}</label>
                     {html_select_locales id='ephemerids_language' name='ephemerid[language]' all=true installed=true selected=$language}

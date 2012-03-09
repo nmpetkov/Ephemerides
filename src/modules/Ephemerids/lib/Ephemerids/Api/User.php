@@ -81,17 +81,23 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
      */
     public function getall($args)
     {
-		if (!isset($args['order'])) {
-			$args['order'] = 'mid, did, yid, eid'; # appropriate order, NP
-		}
-
         // security check
         if (!SecurityUtil::checkPermission('Ephemerids::', '::', ACCESS_READ)) {
             return array();
         }
 
 		$where = $this->_process_args($args);
-        $sort  = $args['order'];
+        $sort = isset($args['sort']) && $args['sort'] ? $args['sort'] : '';
+        $sortdir = isset($args['sortdir']) && $args['sortdir'] ? $args['sortdir'] : 'ASC';
+        if ($sort) {
+			if ($sort=='mid') $sort .= ' '.$sortdir.', did '.$sortdir.', yid '.$sortdir.', eid '.$sortdir;
+			else if ($sort=='did') $sort .= ' '.$sortdir.', mid '.$sortdir.', yid '.$sortdir.', eid '.$sortdir;
+			else if ($sort=='yid') $sort .= ' '.$sortdir.', mid '.$sortdir.', did '.$sortdir.', eid '.$sortdir;
+			else if ($sort=='eid') $sort .= ' '.$sortdir;
+			else $sort .= ' '.$sortdir.', eid '.$sortdir;
+        } else {
+            $sort = 'mid, did, yid, eid'; # appropriate order: @nikp
+        }
 
         // define the permissions filter to use
         $permFilter = array();
