@@ -54,7 +54,7 @@ class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
 		// Implementation cached content: @nikp
 		$enable_cache = true;
 		$write_to_cache = false;	# flag
-		$cache_time = 600; # seconds
+		$cache_time = 3600; # seconds
 		if (isset($vars['cache_time'])) $cache_time = $vars['cache_time'];
 		$content = "";
 		$title = $blockinfo['title'];
@@ -82,6 +82,7 @@ class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
 		}
 		if (empty($content)) {
 			// Create output object
+            $this->view->setCaching(false); // we implement caching other way
 			$apiargs = array();
 			$apiargs['status'] = 1;
 			// Make a category filter only if categorization is enabled
