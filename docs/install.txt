@@ -1,0 +1,4 @@
+IMPORTANT NOTE TO INSTALL:
+
+Module directory name is Ephemerids, not Ephemerides.
+This is subject of change in near future.
