@@ -12,9 +12,9 @@
 		<input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
 		<fieldset>
 			<div class="z-formrow">
-				<label for="ephemerids_date">{gt text='Date'}</label>
+				<label for="ephemerids_date">{gt text='Date (month, date, year)'}</label>
 				<div id="ephemerids_date">{html_select_date year_as_text=true field_array='ephemerid'}</div>
-				<p class="z-formnote z-warningmsg">{gt text="The year can't be lower than the unix epoch one (1970) or will be reseted to 1970 for formatting purposes."}</p>
+				<p class="z-formnote z-warningmsg">{gt text="The year can be empty in case of holiday."}</p>
 			</div>
 			{if $modvars.ZConfig.multilingual}
 			<div class="z-formrow">
