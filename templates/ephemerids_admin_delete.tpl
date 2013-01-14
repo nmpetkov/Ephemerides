@@ -15,5 +15,6 @@
 			<a href="{modurl modname='Ephemerids' type='admin' func='view'}">{img modname='core' src=button_cancel.gif set=icons/small __alt="Cancel" __title="Cancel"}</a>
 		</div>
 	</div>
+{notifydisplayhooks eventname='ephemerids.ui_hooks.items.form_delete' id=$eid}
 </form>
 {adminfooter}

@@ -45,6 +45,9 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
 
         // build the where clause
         $wheres = array();
+		if (isset($args['eid'])) {
+			$wheres[] = "eid = ".DataUtil::formatForStore($args['eid']);
+		}
 		if (isset($args['status'])) {
 			$wheres[] = "status = '".DataUtil::formatForStore($args['status'])."'";
 		}
@@ -211,8 +214,16 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
 
 		// get todays date
 		$today = getdate();
-		$eday = $today['mday'];
-		$emonth = $today['mon'];
+        if (isset($args['eday'])) {
+            $eday = $args['eday'];
+        } else {
+            $eday = $today['mday'];
+        }
+        if (isset($args['emonth'])) {
+            $emonth = $args['emonth'];
+        } else {
+            $emonth = $today['mon'];
+        }
 
 		// init where clause vars
 		$whereargs = array();
