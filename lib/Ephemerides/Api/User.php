@@ -8,7 +8,7 @@
  * @subpackage Ephemerides
  */
 
-class Ephemerids_Api_User extends Zikula_AbstractApi
+class Ephemerides_Api_User extends Zikula_AbstractApi
 {
     /**
      * process user input and form a WHERE clause
@@ -65,7 +65,7 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
             } else {
                 $args['catFilter'][] = $args['category'];
             }
-            $args['catFilter']['__META__'] = array('module' => 'Ephemerids');
+            $args['catFilter']['__META__'] = array('module' => 'Ephemerides');
         }
 
         if ($args['keyword']) {
@@ -78,14 +78,14 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
     }
 
     /**
-     * Get all Ephemerids
+     * Get all Ephemerides
      * @author The Zikula Development Team
      * @return array array containing item id
      */
     public function getall($args)
     {
         // security check
-        if (!SecurityUtil::checkPermission('Ephemerids::', '::', ACCESS_READ)) {
+        if (!SecurityUtil::checkPermission('Ephemerides::', '::', ACCESS_READ)) {
             return array();
         }
 
@@ -105,7 +105,7 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
         // define the permissions filter to use
         $permFilter = array();
         $permFilter[] = array('realm' => 0,
-                'component_left'   => 'Ephemerids',
+                'component_left'   => 'Ephemerides',
                 'component_middle' => '',
                 'component_right'  => '',
                 'instance_left'    => 'author',
@@ -121,7 +121,7 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
                 $property = $args['property'];
                 $args['catFilter'][$property] = $args['category'];
             }
-            $args['catFilter']['__META__'] = array('module' => 'Ephemerids');
+            $args['catFilter']['__META__'] = array('module' => 'Ephemerides');
         }
 	
         // get the object array from the db
@@ -159,7 +159,7 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
         // define the permissions filter to use
         $permFilter = array();
         $permFilter[] = array('realm' => 0,
-                'component_left'   => 'Ephemerids',
+                'component_left'   => 'Ephemerides',
                 'component_middle' => '',
                 'component_right'  => '',
                 'instance_middle'  => '',
@@ -174,7 +174,7 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
     }
 
     /**
-     * Count Ephemerids
+     * Count Ephemerides
      * @author The Zikula Development Team
      * @return int count of items
      */
@@ -208,7 +208,7 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
 	{
 		$items = array();
 
-		if (!SecurityUtil::checkPermission('Ephemerids::', '::', ACCESS_READ)) {
+		if (!SecurityUtil::checkPermission('Ephemerides::', '::', ACCESS_READ)) {
 			return $items;
 		}
 
@@ -239,7 +239,7 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
 		$where = 'WHERE ' . implode(' AND ', $whereargs);
 
 		// define the permission filter to apply
-		$permFilter = array(array('component_left' => 'Ephemerids',
+		$permFilter = array(array('component_left' => 'Ephemerides',
 								  'instance_right' => 'eid',
 								  'level'          => ACCESS_READ));
 
@@ -251,7 +251,7 @@ class Ephemerids_Api_User extends Zikula_AbstractApi
                 $property = $args['property'];
                 $args['catFilter'][$property] = $args['category'];
             }
-            $args['catFilter']['__META__'] = array('module' => 'Ephemerids');
+            $args['catFilter']['__META__'] = array('module' => 'Ephemerides');
         }
 
 		// get the objects from the db

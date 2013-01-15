@@ -7,6 +7,7 @@ CHANGELOG
 	* Hooks subscriber support. This helps to use for example Scribite 5 and EZComments.
 	* Added main user type function, defaults to display function
 	* Added display function; wihout argument show ephemerides for the day, or given one by id.
+	* Internal module name is chenged from Ephemerids to Ephemerides.
 
 #### 3.0.0 (9 Mar 2012)
 	By N.Petkov
@@ -19,8 +20,8 @@ CHANGELOG
 
 #### 1.9 (27 Jan 2011)
 	By N.Petkov. Last version compatible with Zikula 1.2.x
-	* New "type" column for the Ephemerids table, with two states: Event or Holiday. This allows to handle block template and title respectivelly.
-	* Cache block content for given interval, separate for every different instance of Ephemerids block. With this:
+	* New "type" column for the Ephemerides table, with two states: Event or Holiday. This allows to handle block template and title respectivelly.
+	* Cache block content for given interval, separate for every different instance of Ephemerides block. With this:
 	 - improved performance of whole web site;
 	 - change displaying content not per every click of the user, but in given time interval.
  

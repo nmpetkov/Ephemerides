@@ -8,7 +8,7 @@
  * @subpackage Ephemerides
  */
 
-class Ephemerids_Controller_User extends Zikula_AbstractController
+class Ephemerides_Controller_User extends Zikula_AbstractController
 {
     /**
      * the main user function
@@ -42,7 +42,7 @@ class Ephemerids_Controller_User extends Zikula_AbstractController
         }
 
         // check if the contents are cached.
-        $template = 'ephemerids_user_display.tpl';
+        $template = 'ephemerides_user_display.tpl';
         if ($this->view->is_cached($template)) {
             return $this->view->fetch($template);
         }

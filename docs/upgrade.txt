@@ -8,3 +8,13 @@ Upgrade from version 1.* to version 3.* instructions
 3. According to Zikula 1.3 standards, prefixes from module table and from table column names are removed. Upgrade procedure makes this automatically.
 
 4. Template file extensions are changed from *.htm to *.tpl. Also templates are changed according to Zikula 1.3 requirements. Please update your template files if necessary.
+
+5. IMPORTANT!
+From version 3.1.0 internal module name is changed from Ephemerids to Ephemerides. Steps to upgrade:
+- first delete modules/Ephemerids
+- upload modules/Ephemerides directory (from downloaded package)
+- manually (with phpMyAdmin for example) execute query:
+	UPDATE `modules` SET `name`='Ephemerides', `directory`='Ephemerides', `securityschema`='a:1:{s:13:\"Ephemerides::\";s:14:\"::Ephemerid ID\";}' WHERE `directory`='Ephemerids'
+- go to Admin panel, Extensions and upgrade Ephemerides.
+- if you have custom templates, rename them properly, also replace all "ephemerids" words in them to "ephemerides".
+- test the display.

@@ -8,7 +8,7 @@
  * @subpackage Ephemerides
 */
 
-class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
+class Ephemerides_Block_Ephemeride extends Zikula_Controller_AbstractBlock
 {
     /**
      * initialise block
@@ -16,7 +16,7 @@ class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
     public function init()
     {
         // Security
-        SecurityUtil::registerPermissionSchema('Ephemerids:Ephemerideblock:', 'Block ID::');
+        SecurityUtil::registerPermissionSchema('Ephemerides:Ephemerideblock:', 'Block ID::');
     }
 
     /**
@@ -42,7 +42,7 @@ class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
     public function display($blockinfo)
     {
         // security check
-        if (!SecurityUtil::checkPermission('Ephemerids:Ephemerideblock:', $blockinfo['bid'].'::', ACCESS_READ)) {
+        if (!SecurityUtil::checkPermission('Ephemerides:Ephemerideblock:', $blockinfo['bid'].'::', ACCESS_READ)) {
             return;
         }
         // Get current content
@@ -111,7 +111,7 @@ class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
             }
             $this->view->assign('items', $items);
             // Populate block info and pass to theme
-            $content = $this->view->fetch('ephemerids_block_ephemeride.tpl');
+            $content = $this->view->fetch('ephemerides_block_ephemeride.tpl');
 
             // loop to see if we have items of type=1 (events), if not - not to put title to the block (holidays only)
             $have_events = false;
@@ -177,7 +177,7 @@ class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
         if (!is_array($vars['category'])) $vars['category'] = array();
         $this->view->assign('category', $vars['category']);
         // return the output
-        return $this->view->fetch('ephemerids_block_ephemeride_modify.tpl');
+        return $this->view->fetch('ephemerides_block_ephemeride_modify.tpl');
     }
 
     /**
@@ -201,7 +201,7 @@ class Ephemerids_Block_Ephemeride extends Zikula_Controller_AbstractBlock
         $blockinfo['content'] = BlockUtil::varsToContent($vars);
 
         // clear the block cache
-        $this->view->clear_cache('ephemerids_block_ephemeride.tpl');
+        $this->view->clear_cache('ephemerides_block_ephemeride.tpl');
 
         return $blockinfo;
     }

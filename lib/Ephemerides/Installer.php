@@ -8,10 +8,10 @@
  * @subpackage Ephemerides
  */
  
-class Ephemerids_Installer extends Zikula_AbstractInstaller
+class Ephemerides_Installer extends Zikula_AbstractInstaller
 {
     /**
-     * Init ephemerids module
+     * Init ephemerides module
      * @author The Zikula Development Team
      * @return true if init successful, false otherwise
      */
@@ -35,7 +35,7 @@ class Ephemerids_Installer extends Zikula_AbstractInstaller
         }
 
         // set up module variables
-        ModUtil::setVars('Ephemerids', $modvars);
+        ModUtil::setVars('Ephemerides', $modvars);
 
         // Register for hooks subscribing
         HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
@@ -45,7 +45,7 @@ class Ephemerids_Installer extends Zikula_AbstractInstaller
     }
 
     /**
-     * Upgrade ephemerids module
+     * Upgrade ephemerides module
      * @author The Zikula Development Team
      * @return true if init successful, false otherwise
      */
@@ -56,10 +56,10 @@ class Ephemerids_Installer extends Zikula_AbstractInstaller
         {
 			case '1.2':
 				// version 1.2 shipped with postnuke .72x/.75
-                ModUtil::setVar('Ephemerids', 'itemsperpage', 25);
+                ModUtil::setVar('Ephemerides', 'itemsperpage', 25);
 
             case '1.6':
-				$this->ephemerids_upgrade_updateEphemeridsLanguages();
+				$this->ephemerides_upgrade_updateEphemeridesLanguages();
 
 			case '1.7':
 				// needs update of table, added status column
@@ -93,18 +93,30 @@ class Ephemerids_Installer extends Zikula_AbstractInstaller
                     } catch (Exception $e) {
                     }   
                 }
-				// update table structure according to tabe defenition
+				// update table structure according to table defenition
 				if (!DBUtil::changeTable('ephem')) {
 					return "1.9";
 				}
 				// enable categorisation this module
-				ModUtil::setVar('Ephemerids', 'enablecategorization', true);
+				ModUtil::setVar('Ephemerides', 'enablecategorization', true);
 				// create our default category
 				if (!$this->_createdefaultcategory()) {
 					LogUtil::registerStatus($this->$this->__('Warning! Could not create the default Ephemerides category tree. If you want to use categorisation with Ephemerides, register at least one property for the module in the Category Registry.'));
 					$modvars['enablecategorization'] = false;
 				}
             case '3.0.0':
+                $connection = Doctrine_Manager::getInstance()->getConnection('default');
+                $sqlStatements = array();
+                // change module name from Ephemerids to Ephemerides
+                $sqlStatements[] = "UPDATE `modules` SET `name`='Ephemerides', `directory`='Ephemerides', `securityschema`='a:1:{s:13:\"Ephemerides::\";s:14:\"::Ephemerid ID\";}' WHERE `directory`='Ephemerids';";
+                $sqlStatements[] = "UPDATE `module_vars` SET `modname`='Ephemerides' WHERE `modname`='Ephemerids';";
+                foreach ($sqlStatements as $sql) {
+                    $stmt = $connection->prepare($sql);
+                    try {
+                        $stmt->execute();
+                    } catch (Exception $e) {
+                    }   
+                }
                 // Register for hook subscribing
                 HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
 
@@ -117,7 +129,7 @@ class Ephemerids_Installer extends Zikula_AbstractInstaller
     }
 
     /**
-     * Delete ephemerids module
+     * Delete ephemerides module
      * @author The Zikula Development Team
      * @return true if init successful, false otherwise
      */
@@ -128,12 +140,12 @@ class Ephemerids_Installer extends Zikula_AbstractInstaller
         }
 
         // delete module variables
-        ModUtil::delVar('Ephemerids');
+        ModUtil::delVar('Ephemerides');
 
         // delete entries from category registry
         ModUtil::dbInfoLoad('Categories');
-        DBUtil::deleteWhere('categories_registry', "crg_modname = 'Ephemerids'");
-        DBUtil::deleteWhere('categories_mapobj', "cmo_modname = 'Ephemerids'");
+        DBUtil::deleteWhere('categories_registry', "crg_modname = 'Ephemerides'");
+        DBUtil::deleteWhere('categories_mapobj', "cmo_modname = 'Ephemerides'");
 
         // unregister handlers
         HookUtil::unregisterSubscriberBundles($this->version->getHookSubscriberBundles());
@@ -149,14 +161,14 @@ class Ephemerids_Installer extends Zikula_AbstractInstaller
 
         // get the category path for which we're going to insert our place holder category
         $rootcat = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules');
-        $qCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/Ephemerids');
+        $qCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/Ephemerides');
 
         if (!$qCat) {
             // create placeholder for all our migrated categories
             $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $rootcat['id']);
-            $cat->setDataField('name', 'Ephemerids');
-            $cat->setDataField('display_name', array($lang => $this->__('Ephemerids')));
+            $cat->setDataField('name', 'Ephemerides');
+            $cat->setDataField('display_name', array($lang => $this->__('Ephemerides')));
             $cat->setDataField('display_desc', array($lang => $this->__('Ephemerides')));
             if (!$cat->validate('admin')) {
                 return false;
@@ -170,7 +182,7 @@ class Ephemerids_Installer extends Zikula_AbstractInstaller
         if ($rootcat) {
             // create an entry in the categories registry
             $registry = new Categories_DBObject_Registry();
-            $registry->setDataField('modname', 'Ephemerids');
+            $registry->setDataField('modname', 'Ephemerides');
             $registry->setDataField('table', 'ephem');
             $registry->setDataField('property', 'Main');
             $registry->setDataField('category_id', $rootcat['id']);
@@ -182,7 +194,7 @@ class Ephemerids_Installer extends Zikula_AbstractInstaller
         return true;
     }
 
-	private function ephemerids_upgrade_updateEphemeridsLanguages()
+	private function ephemerides_upgrade_updateEphemeridesLanguages()
 	{
 		$obj = DBUtil::selectObjectArray('ephem');
 

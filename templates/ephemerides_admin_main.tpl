@@ -1,0 +1,1 @@
+{modfunc modname='Ephemerides' type='admin' func='view'}

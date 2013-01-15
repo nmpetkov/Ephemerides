@@ -7,7 +7,7 @@
  * Get Ephemerides table array
  * @return       array with table information.
 */
-function Ephemerids_tables()
+function Ephemerides_tables()
 {
 	// initialise table array
 	$tables = array();
@@ -32,7 +32,7 @@ function Ephemerids_tables()
 									 'type'     => "I1 DEFAULT '1'");
 
 	// enable categorization services
-	$tables['ephem_db_extra_enable_categorization'] = ModUtil::getVar('Ephemerids', 'enablecategorization', true);
+	$tables['ephem_db_extra_enable_categorization'] = ModUtil::getVar('Ephemerides', 'enablecategorization', true);
 	$tables['ephem_primary_key_column'] = 'eid';
 
 	// add standard data fields
