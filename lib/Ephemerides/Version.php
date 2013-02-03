@@ -16,7 +16,8 @@ class Ephemerides_Version extends Zikula_AbstractVersion
         $meta['version'] = '3.1.0';
         $meta['url'] = $this->__('ephem');
         $meta['core_min'] = '1.3.0'; // requires minimum 1.3.0 or later
-        $meta['capabilities']   = array(HookUtil::SUBSCRIBER_CAPABLE => array('enabled' => true));
+        $meta['capabilities']   = array(HookUtil::SUBSCRIBER_CAPABLE => array('enabled' => true),
+                                        HookUtil::PROVIDER_CAPABLE => array('enabled' => true));
         $meta['securityschema'] = array('Ephemerides::' => '::Ephemerid ID');
         return $meta;
     }
@@ -27,11 +28,10 @@ class Ephemerides_Version extends Zikula_AbstractVersion
         $bundle = new Zikula_HookManager_SubscriberBundle($this->name, 'subscriber.ephemerides.ui_hooks.items', 'ui_hooks', $this->__('Ephemerides Items Hooks'));
         $bundle->addEvent('display_view', 'ephemerides.ui_hooks.items.display_view');
         $bundle->addEvent('form_edit', 'ephemerides.ui_hooks.items.form_edit');
-        $bundle->addEvent('form_delete', 'ephemerides.ui_hooks.items.form_delete');
         $this->registerHookSubscriberBundle($bundle);
 
-        $bundle = new Zikula_HookManager_SubscriberBundle($this->name, 'subscriber.ephemerides.filter_hooks.items', 'filter_hooks', $this->__('Ephemerides Filter Hooks'));
-        $bundle->addEvent('filter', 'ephemerides.filter_hooks.items.filter');
-        $this->registerHookSubscriberBundle($bundle);
+        $bundle = new Zikula_HookManager_ProviderBundle($this->name, 'provider.ephemerides.ui_hooks.ephemeride', 'ui_hooks', $this->__('Ephemerides Item'));
+        $bundle->addServiceHandler('display_view', 'Ephemerides_HookHandlers', 'uiView', 'ephemerides.ephemeride');
+        $this->registerHookProviderBundle($bundle);
     }
 }

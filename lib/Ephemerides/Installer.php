@@ -37,8 +37,9 @@ class Ephemerides_Installer extends Zikula_AbstractInstaller
         // set up module variables
         ModUtil::setVars('Ephemerides', $modvars);
 
-        // Register for hooks subscribing
+        // Register hooks
         HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
+        HookUtil::registerProviderBundles($this->version->getHookProviderBundles());
 
         // initialisation successful
         return true;
@@ -69,24 +70,24 @@ class Ephemerides_Installer extends Zikula_AbstractInstaller
 
 			case '1.9':
                 $connection = Doctrine_Manager::getInstance()->getConnection('default');
-                $sqlStatements = array();
 				// drop table prefix
                 $prefix = $this->serviceManager['prefix'];
-                $sqlStatements[] = 'RENAME TABLE ' . $prefix . '_ephem' . " TO `ephem`";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_eid` `eid` INT(11) NOT NULL AUTO_INCREMENT";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_did` `did` TINYINT(4) NOT NULL DEFAULT '0'";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_mid` `mid` TINYINT(4) NOT NULL DEFAULT '0'";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_yid` `yid` SMALLINT(6) NOT NULL DEFAULT '0'";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_content` `content` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_language` `language` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_obj_status` `obj_status` VARCHAR(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'A'";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_cr_date` `cr_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00'";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_cr_uid` `cr_uid` INT(11) NOT NULL DEFAULT '0'";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_lu_date` `lu_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00'";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_lu_uid` `lu_uid` INT(11) NOT NULL DEFAULT '0'";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_status` `status` TINYINT(4) NULL DEFAULT '1'";
-                $sqlStatements[] = "ALTER TABLE `ephem` CHANGE `pn_type` `type` TINYINT(4) NULL DEFAULT '1'";
-                foreach ($sqlStatements as $sql) {
+                $sqlQueries = array();
+                $sqlQueries[] = 'RENAME TABLE ' . $prefix . '_ephem' . " TO `ephem`";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_eid` `eid` INT(11) NOT NULL AUTO_INCREMENT";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_did` `did` TINYINT(4) NOT NULL DEFAULT '0'";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_mid` `mid` TINYINT(4) NOT NULL DEFAULT '0'";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_yid` `yid` SMALLINT(6) NOT NULL DEFAULT '0'";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_content` `content` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_language` `language` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_obj_status` `obj_status` VARCHAR(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'A'";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_cr_date` `cr_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00'";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_cr_uid` `cr_uid` INT(11) NOT NULL DEFAULT '0'";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_lu_date` `lu_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00'";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_lu_uid` `lu_uid` INT(11) NOT NULL DEFAULT '0'";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_status` `status` TINYINT(4) NULL DEFAULT '1'";
+                $sqlQueries[] = "ALTER TABLE `ephem` CHANGE `pn_type` `type` TINYINT(4) NULL DEFAULT '1'";
+                foreach ($sqlQueries as $sql) {
                     $stmt = $connection->prepare($sql);
                     try {
                         $stmt->execute();
@@ -106,19 +107,31 @@ class Ephemerides_Installer extends Zikula_AbstractInstaller
 				}
             case '3.0.0':
                 $connection = Doctrine_Manager::getInstance()->getConnection('default');
-                $sqlStatements = array();
-                // change module name from Ephemerids to Ephemerides
-                $sqlStatements[] = "UPDATE `modules` SET `name`='Ephemerides', `directory`='Ephemerides', `securityschema`='a:1:{s:13:\"Ephemerides::\";s:14:\"::Ephemerid ID\";}' WHERE `directory`='Ephemerids';";
-                $sqlStatements[] = "UPDATE `module_vars` SET `modname`='Ephemerides' WHERE `modname`='Ephemerids';";
-                foreach ($sqlStatements as $sql) {
+                // Change module name from Ephemerids to Ephemerides
+                $sqlQueries = array();
+                $sqlQueries[] = "UPDATE `modules` SET `name`='Ephemerides', `directory`='Ephemerides', `securityschema`='a:1:{s:13:\"Ephemerides::\";s:14:\"::Ephemerid ID\";}' WHERE `directory`='Ephemerids';";
+                $sqlQueries[] = "UPDATE `module_vars` SET `modname`='Ephemerides' WHERE `modname`='Ephemerids';";
+                foreach ($sqlQueries as $sql) {
                     $stmt = $connection->prepare($sql);
                     try {
                         $stmt->execute();
                     } catch (Exception $e) {
                     }   
                 }
-                // Register for hook subscribing
+                // Register hooks
+                $sqlQueries = array();
+                $sqlQueries[] = 'DELETE FROM `hook_area` WHERE `owner`="Ephemerides"';
+                $sqlQueries[] = 'DELETE FROM `hook_subscriber` WHERE `owner`="Ephemerides"';
+                $sqlQueries[] = 'DELETE FROM `hook_provider` WHERE `owner`="Ephemerides"';
+                foreach ($sqlQueries as $sql) {
+                    $stmt = $connection->prepare($sql);
+                    try {
+                        $stmt->execute();
+                    } catch (Exception $e) {
+                    }   
+                }
                 HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
+                HookUtil::registerProviderBundles($this->version->getHookProviderBundles());
 
             case '3.1.0':
 				// future upgrade routines
@@ -135,20 +148,19 @@ class Ephemerides_Installer extends Zikula_AbstractInstaller
      */
     public function uninstall()
     {
-        if (!DBUtil::dropTable('ephem')) {
-            return false;
-        }
+        DBUtil::dropTable('ephem');
 
         // delete module variables
         ModUtil::delVar('Ephemerides');
 
         // delete entries from category registry
-        ModUtil::dbInfoLoad('Categories');
-        DBUtil::deleteWhere('categories_registry', "crg_modname = 'Ephemerides'");
-        DBUtil::deleteWhere('categories_mapobj', "cmo_modname = 'Ephemerides'");
+        /*ModUtil::dbInfoLoad('Categories');
+        DBUtil::deleteWhere('categories_registry', "modname = 'Ephemerides'");
+        DBUtil::deleteWhere('categories_mapobj', "modname = 'Ephemerides'");*/
 
-        // unregister handlers
+        // Remove hooks
         HookUtil::unregisterSubscriberBundles($this->version->getHookSubscriberBundles());
+        HookUtil::unregisterProviderBundles($this->version->getHookProviderBundles());
 
         // deletion successful
         return true;

@@ -41,6 +41,9 @@ class Ephemerides_Controller_User extends Zikula_AbstractController
             $args['eid'] = $eid;
         }
 
+        // Chek permissions
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Ephemerides::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+
         // check if the contents are cached.
         $template = 'ephemerides_user_display.tpl';
         if ($this->view->is_cached($template)) {
