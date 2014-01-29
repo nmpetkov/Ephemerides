@@ -4,9 +4,6 @@
     <h3>{gt text='Create new ephemeride'}</h3>
 </div>
 
-<div class="z-adminpageicon">{img modname='core' src='filenew.gif' set='icons/large' alt=$templatetitle}</div>
-<h2>{$templatetitle}</h2>
-
 <form class="z-form" action="{modurl modname='Ephemerides' type='admin' func='create'}" method="post" enctype="application/x-www-form-urlencoded">
     <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
     <fieldset>
@@ -59,8 +56,8 @@
     {notifydisplayhooks eventname='ephemerides.ui_hooks.items.form_edit' id=null}
 
     <div class="z-buttonrow z-buttons z-center">
-        {button src='button_ok.gif' set='icons/small' __alt='Create' __title='Create'}
-        <a href="{modurl modname='Ephemerides' type='admin' func='view'}">{img modname='core' src='button_cancel.gif' set='icons/small' __alt='Cancel' __title='Cancel'}</a>
+        {button src='button_ok.png' set='icons/small' __alt='Create' __title='Create'}
+        <a href="{modurl modname='Ephemerides' type='admin' func='view'}">{img modname='core' src='button_cancel.png' set='icons/small' __alt='Cancel' __title='Cancel'}</a>
     </div>
 </form>
 {adminfooter}

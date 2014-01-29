@@ -39,7 +39,7 @@ function setstatus(eid, status)
     ajaxindicator.style.display = "inline";
 
     var pars = {eid: eid, status: status};
-    new Zikula.Ajax.Request("ajax.php?module=Ephemerides&func=setstatus",
+    new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=Ephemerides&func=setstatus",
         {parameters: pars, onComplete: setstatus_response});
 }
 function setstatus_response(req)

@@ -85,8 +85,8 @@ class Ephemerides_Controller_Admin extends Zikula_AbstractController
         if ($clear) {
             $property = $category = $keyword = null;
         }
-        $sort = FormUtil::getPassedValue('sort', $sort, 'GET');
-        $sortdir = FormUtil::getPassedValue('sortdir', $sortdir, 'GET');
+        $sort = FormUtil::getPassedValue('sort', '', 'GET');
+        $sortdir = FormUtil::getPassedValue('sortdir', '', 'GET');
         if ($sortdir != 'ASC' && $sortdir != 'DESC') {
                 $sortdir = 'ASC';
         }
@@ -131,12 +131,12 @@ class Ephemerides_Controller_Admin extends Zikula_AbstractController
             $options = array();
             if (SecurityUtil::checkPermission($this->name.'::', "::".$item['eid'], ACCESS_EDIT)) {
                 $ephemerides[$key]['options'][] = array('url'   => ModUtil::url($this->name, 'admin', 'modify', array('eid' => $item['eid'])),
-                        'image' => 'xedit.gif',
+                        'image' => 'xedit.png',
                         'title' => $this->__('Edit'));
 
                 if (SecurityUtil::checkPermission($this->name.'::', "::".$item['eid'], ACCESS_DELETE)) {
                     $ephemerides[$key]['options'][] = array('url'   => ModUtil::url($this->name, 'admin', 'delete', array('eid' => $item['eid'])),
-                            'image' => '14_layer_deletelayer.gif',
+                            'image' => '14_layer_deletelayer.png',
                             'title' => $this->__('Delete'));
                 }
             }
@@ -173,6 +173,9 @@ class Ephemerides_Controller_Admin extends Zikula_AbstractController
             $this->view->assign('properties', $propArray);
             $this->view->assign('property', $property);
             $this->view->assign("category", $category);
+        } else {
+            $this->view->assign('property', '');
+            $this->view->assign("category", '');
         }
 
         // assign the values for the smarty plugin to produce a pager

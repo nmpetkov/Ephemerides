@@ -3,7 +3,7 @@
     <label>{gt text='Choose categories'}</label>
     {nocache}
     {foreach from=$catregistry key='prop' item='cat'}
-    {array_field_isset array=$category field=$prop returnValue=1 assign='selectedValue'}
+    {array_field array=$category field=$prop returnValue=1 assign='selectedValue'}
     <div class="z-formnote">
         {selector_category category=$cat name="category[$prop]" multipleSize=5 selectedValue=$selectedValue}
     </div>

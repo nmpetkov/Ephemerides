@@ -11,8 +11,8 @@
 		<input type="hidden" name="confirmation" value="1" />
 		<input type="hidden" name="eid" value="{$eid|safetext}" />
 		<div class="z-formbuttons">
-			{button src='button_ok.gif' set='icons/small' __alt='Confirm deletion?' __title='Confirm deletion?'}
-			<a href="{modurl modname='Ephemerides' type='admin' func='view'}">{img modname='core' src=button_cancel.gif set=icons/small __alt="Cancel" __title="Cancel"}</a>
+			{button src='button_ok.png' set='icons/small' __alt='Confirm deletion?' __title='Confirm deletion?'}
+			<a href="{modurl modname='Ephemerides' type='admin' func='view'}">{img modname='core' src=button_cancel.png set=icons/small __alt="Cancel" __title="Cancel"}</a>
 		</div>
 	</div>
 {notifydisplayhooks eventname='ephemerides.ui_hooks.items.form_delete' id=$eid}

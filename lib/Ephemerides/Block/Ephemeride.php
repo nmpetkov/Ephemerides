@@ -102,7 +102,9 @@ class Ephemerides_Block_Ephemeride extends Zikula_Controller_AbstractBlock
             }
             $this->view->assign('enablecategorization', $enablecategorization);
             $this->view->assign($vars); // assign the block vars
-            if (!is_array($vars['category'])) $vars['category'] = array();
+            if (!isset($vars['category']) || !is_array($vars['category'])) {
+                $vars['category'] = array();
+            }
             $this->view->assign('category', $vars['category']);
             // get items
             $items = ModUtil::apiFunc($this->name, 'user', 'gettoday', $apiargs);
@@ -174,7 +176,9 @@ class Ephemerides_Block_Ephemeride extends Zikula_Controller_AbstractBlock
         }
         $this->view->assign('enablecategorization', $enablecategorization);
         $this->view->assign($vars); // assign the block vars
-        if (!is_array($vars['category'])) $vars['category'] = array();
+        if (!isset($vars['category']) || !is_array($vars['category'])) {
+            $vars['category'] = array();
+        }
         $this->view->assign('category', $vars['category']);
         // return the output
         return $this->view->fetch('ephemerides_block_ephemeride_modify.tpl');

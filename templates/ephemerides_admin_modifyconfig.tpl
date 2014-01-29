@@ -18,8 +18,8 @@
 			</div>
 		</fieldset>
 		<div class="z-formrow z-formbuttons">
-			{button src='button_ok.gif' set='icons/small' __alt='Save' __title='Save'}
-			<a href="{modurl modname='Ephemerides' type='admin' func='view'}">{img modname='core' src='button_cancel.gif' set='icons/small' __alt='Cancel' __title='Cancel'}</a>
+			{button src='button_ok.png' set='icons/small' __alt='Save' __title='Save'}
+			<a href="{modurl modname='Ephemerides' type='admin' func='view'}">{img modname='core' src='button_cancel.png' set='icons/small' __alt='Cancel' __title='Cancel'}</a>
 		</div>
 	</div>
 </form>
