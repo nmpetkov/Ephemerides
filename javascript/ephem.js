@@ -29,3 +29,43 @@ function ephemerides_property_onchange()
     var id = "ephemerides_"+$('ephemerides_property').value+"_category";
     $(id).show();
 }
+
+/**
+ * Toggle active/inactive status
+ */
+function setstatus(eid, status)
+{
+    ajaxindicator = document.getElementById("statusajaxind_"+eid);
+    ajaxindicator.style.display = "inline";
+
+    var pars = {eid: eid, status: status};
+    new Zikula.Ajax.Request("ajax.php?module=Ephemerides&func=setstatus",
+        {parameters: pars, onComplete: setstatus_response});
+}
+function setstatus_response(req)
+{
+    if (!req.isSuccess()) {
+        Zikula.showajaxerror(req.getMessage());
+        return;
+    }
+    var data = req.getData();
+    
+    if (data.alert) {
+        alert(data.alert);
+    }
+
+    ajaxindicator = document.getElementById("statusajaxind_"+data.eid);
+    ajaxindicator.style.display = "none";
+
+    elementActive = document.getElementById("statusactive_"+data.eid);
+    elementInactive = document.getElementById("statusinactive_"+data.eid);
+    if (elementActive && elementInactive) {
+        if (data.status == 1) {
+            elementActive.style.display = "block";
+            elementInactive.style.display = "none";
+        } else {
+            elementActive.style.display = "none";
+            elementInactive.style.display = "block";
+        }
+    }
+}

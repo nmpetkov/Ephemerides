@@ -1,4 +1,6 @@
 {ajaxheader modname='Ephemerides' filename='ephem.js' nobehaviour=true noscriptaculous=true}
+{gt text="Click to activate" assign=activate}
+{gt text="Click to deactivate" assign=deactivate}
 
 {adminheader}
 <div class="z-admin-content-pagetitle">
@@ -77,9 +79,16 @@
 			</td>
 			{/if}
 			<td>{$ephemeride.eid}</td>
-			<td>
-				{if $ephemeride.status eq 0}<strong><em>{gt text='Inactive'}</em></strong>{/if}
-				{if $ephemeride.status eq 1}{gt text='Active'}{/if}
+			<td class="z-nowrap">
+                <div id="statusactive_{$ephemeride.eid}" style="display: {if $ephemeride.status}block{else}none{/if};">
+                    <a href="javascript:void(0);" onclick="setstatus({$ephemeride.eid},0)">{img src="greenled.png" modname="core" set="icons/extrasmall" title=$deactivate alt=$deactivate}</a>
+                    &nbsp;{gt text="Active"}
+                </div>
+                <div id="statusinactive_{$ephemeride.eid}" style="display: {if $ephemeride.status}none{else}block{/if};">
+                    <a href="javascript:void(0);" onclick="setstatus({$ephemeride.eid},1)">{img src="redled.png" modname="core" set="icons/extrasmall" title=$activate alt=$activate}</a>
+                    &nbsp;{gt text="Inactive"}
+                </div>
+                {img id="statusajaxind_"|cat:$ephemeride.eid style="display: none;" modname=core set="ajax" src="indicator_circle.gif" alt=""}
 			</td>
 			<td>
 				{if $ephemeride.type eq 1}{gt text='Event'}{/if}
