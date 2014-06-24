@@ -62,9 +62,12 @@ class Ephemerides_Block_Ephemeride extends Zikula_Controller_AbstractBlock
             $cachefilestem = 'ephem_' . $blockinfo['bid'];
             $cachedir = System::getVar('temp');
             if (StringUtil::right($cachedir, 1)<>'/') $cachedir .= '/';
-            if (isset($vars['cache_dir']) and !empty($vars['cache_dir'])) $cachedir .= $vars['cache_dir'];
-            else $cachedir .= 'any_cache';
-            $cachefile = $cachedir .'/'. $cachefilestem;
+            if (isset($vars['cache_dir']) and !empty($vars['cache_dir'])) {
+                $cachedir .= $vars['cache_dir'];
+            } else {
+                $cachedir .= 'any_cache';
+            }
+            $cachefile = $cachedir .'/'. $cachefilestem . '_' . SecurityUtil::getSecurityLevel(SecurityUtil::getAuthInfo(), 'Ephemerides::', '::');
             $cachefile_title = $cachedir .'/'. $cachefilestem . '_t';
            // attempt to load from cache
             if (file_exists($cachefile)) {
