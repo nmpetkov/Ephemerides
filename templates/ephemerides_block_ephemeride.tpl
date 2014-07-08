@@ -1,4 +1,5 @@
 {if $items}
+{ajaxheader imageviewer="true"}
 {checkpermission component='Ephemerides::' instance='::' level='ACCESS_EDIT' assign='authedit'}
 {section name='ephemerides' loop=$items}
 <div class="ephemerides_block">
