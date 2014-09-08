@@ -16,6 +16,10 @@
 				<label for="ephemerides_itemsperpage">{gt text="Items per page in admin panel list view"}</label>
 				<input id="ephemerides_itemsperpage" type="text" name="itemsperpage" size="3" value="{$itemsperpage|safetext}" />
 			</div>
+			<div class="z-formrow">
+				<label for="ephemerides_enablefacebookshare">{gt text='Enable Facebook share button'}</label>
+				<input id="ephemerides_enablefacebookshare" type="checkbox" name="enablefacebookshare"{if $enablefacebookshare} checked="checked"{/if} />
+			</div>
 		</fieldset>
 		<div class="z-formrow z-formbuttons">
 			{button src='button_ok.png' set='icons/small' __alt='Save' __title='Save'}
