@@ -129,6 +129,9 @@ class Ephemerides_Controller_Admin extends Zikula_AbstractController
         {
             // options for the item
             $options = array();
+            $ephemerides[$key]['options'][] = array('url'   => ModUtil::url($this->name, 'user', 'display', array('eid' => $item['eid'])),
+                    'image' => 'demo.png',
+                    'title' => $this->__('View'));
             if (SecurityUtil::checkPermission($this->name.'::', "::".$item['eid'], ACCESS_EDIT)) {
                 $ephemerides[$key]['options'][] = array('url'   => ModUtil::url($this->name, 'admin', 'modify', array('eid' => $item['eid'])),
                         'image' => 'xedit.png',
