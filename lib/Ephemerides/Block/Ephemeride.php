@@ -166,6 +166,9 @@ class Ephemerides_Block_Ephemeride extends Zikula_Controller_AbstractBlock
         if (!isset($vars['cache_dir'])) {
             $vars['cache_dir'] = 'any_cache';
         }
+        if (!isset($vars['enablefacebookshare'])) {
+            $vars['enablefacebookshare'] = false;
+        }
         // Create output object
         $this->view->caching = false; # Admin output changes often, we do not want caching
         // Select categories only if enabled for the module
@@ -205,6 +208,7 @@ class Ephemerides_Block_Ephemeride extends Zikula_Controller_AbstractBlock
         $vars['cache_time'] = FormUtil::getPassedValue('cache_time');
         $vars['cache_dir'] = FormUtil::getPassedValue('cache_dir');
         $vars['category'] = FormUtil::getPassedValue('category', null);
+        $vars['enablefacebookshare'] = FormUtil::getPassedValue('enablefacebookshare', false);
 
         // write back the new contents
         $blockinfo['content'] = BlockUtil::varsToContent($vars);
