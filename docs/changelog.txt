@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-#### 3.1.1 (2015-09-11)
+#### 3.2.0 (2015-09-11)
     * Change active/inactive status with AJAX request
     * Added possibility to edit item directly from block display
     * Image viewer (rel=lightbox) test and usage
