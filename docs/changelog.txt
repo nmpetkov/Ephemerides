@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+#### 3.1.1 (2015-09-11)
+    * Change active/inactive status with AJAX request
+    * Added possibility to edit item directly from block display
+    * Image viewer (rel=lightbox) test and usage
+    * Add view item button in admin list
+    * Add description and title metatags to display function
+    * Configurable facebook share button in block and in the display function
+    * Corrections and test to work in Zikula 1.4.0, and also in Zikula 1.3
+
 #### 3.1.0 (2 Feb 2013)
 	By N.Petkov
 	* Updated to Zikula 1.3.5/1.3.6 standarts (have to work in both)
