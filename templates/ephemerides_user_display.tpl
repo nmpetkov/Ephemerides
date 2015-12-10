@@ -9,7 +9,12 @@
     {$items[ephemerides].content|safehtml}
     {if $authedit}<a href="{modurl modname='Ephemerides' type='admin' func='modify' eid=$items[ephemerides].eid delcache=true}">Edit</a>{/if}
     {notifydisplayhooks eventname='ephemerides.ui_hooks.items.display_view' id=$items[ephemerides].eid}
-    {if $modvars.Ephemerides.enablefacebookshare}<div class="fb-share-button" data-href="{modurl modname='Ephemerides' type='user' func='display' eid=$items[ephemerides].eid fqurl=true}"></div>{/if}
+    {if $modvars.Ephemerides.enablefacebookshare}
+        <div class="fb-share-button" data-href="{modurl modname='Ephemerides' type='user' func='display' eid=$items[ephemerides].eid fqurl=true}"></div>
+        {getImage htmlcontent=$items[ephemerides].content putbaseurl=true assign='imagesrc'}{if $imagesrc}{pageaddvarblock}
+        <meta property="og:image" content="{$imagesrc}"/>
+        {/pageaddvarblock}{/if}
+    {/if}
 </div>
 {/section}
 {if $modvars.Ephemerides.enablefacebookshare}
