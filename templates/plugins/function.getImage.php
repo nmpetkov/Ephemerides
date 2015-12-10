@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Smarty function to return first image src from given HTML content.
  *
@@ -8,7 +7,7 @@
  *  {getImage htmlcontent=$item.body putbaseurl=true}
  *  {getImage htmlcontent=$item.body putbaseurl=true assign='imagesrc'}
  *
- * @return string the plugin description.
+ * @return string
  */
 function smarty_function_getImage($params, Zikula_View $view)
 {
