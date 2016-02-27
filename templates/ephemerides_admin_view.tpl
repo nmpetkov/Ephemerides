@@ -49,7 +49,9 @@
 		</span>
     </fieldset>
 </form>
-
+<div>
+{gt text='Go to month:'} <a href="#m1">1</a>  <a href="#m2">2</a>  <a href="#m3">3</a>  <a href="#m4">4</a>  <a href="#m5">5</a>  <a href="#m6">6</a>  <a href="#m7">7</a>  <a href="#m8">8</a>  <a href="#m9">9</a>  <a href="#m10">10</a>  <a href="#m11">11</a>  <a href="#m12">12</a>
+</div>
 <table class="z-datatable">
 	<thead>
 		<tr>
@@ -69,7 +71,7 @@
 	<tbody>
 		{foreach from=$ephemerides item='ephemeride'}
 		<tr class="{cycle values='z-odd,z-even'}" style="vertical-align: top">
-			<td>{$ephemeride.mid}</td>
+			<td><a name="m{$ephemeride.mid}"></a>{$ephemeride.mid}</td>
 			<td>{$ephemeride.did}</td>
 			<td>{if $ephemeride.yid}{$ephemeride.yid}{/if}</td>
 			<td>{$ephemeride.content}</td>
