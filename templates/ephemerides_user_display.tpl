@@ -1,11 +1,12 @@
 {checkpermission component='Ephemerides::' instance='::' level='ACCESS_EDIT' assign='authedit'}
+{assign var=thisyear value=$smarty.now|date_format:"%Y"}
 {section name='ephemerides' loop=$items}
 {setmetatag name='description' value=$items[ephemerides].content|strip_tags|trim|truncate:500}
 {pagesetvar name='title' value="`$items[ephemerides].yid`-`$items[ephemerides].mid`-`$items[ephemerides].did`"|strip_tags}
 <div class="ephemerides_display">
-	{if $items[ephemerides].yid}
-    <h3>{$items[ephemerides].yid|safetext}</h3>
-    {/if}
+    <h3>
+	{if $items[ephemerides].yid}{$items[ephemerides].yid|safetext}{else}{$thisyear}{/if}, {1|mktime:0:0:$items[ephemerides].mid:$items[ephemerides].did:$thisyear|dateformat:'%e %B'}{* using current year to avoid unix limitation *}
+    </h3>
     {$items[ephemerides].content|safehtml}
     {if $authedit}<a href="{modurl modname='Ephemerides' type='admin' func='modify' eid=$items[ephemerides].eid delcache=true}">Edit</a>{/if}
     {notifydisplayhooks eventname='ephemerides.ui_hooks.items.display_view' id=$items[ephemerides].eid}
