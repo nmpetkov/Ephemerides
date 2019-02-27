@@ -31,8 +31,8 @@ class Ephemerides_Controller_User extends Zikula_AbstractController
      */
     public function display($args)
     {
-        $eid   = FormUtil::getPassedValue('eid', isset($args['eid']) ? $args['eid'] : null, 'REQUEST');
-        $objectid = FormUtil::getPassedValue('objectid', isset($args['objectid']) ? $args['objectid'] : null, 'REQUEST');
+        $eid   = (int)FormUtil::getPassedValue('eid', isset($args['eid']) ? $args['eid'] : null, 'REQUEST');
+        $objectid = (int)FormUtil::getPassedValue('objectid', isset($args['objectid']) ? $args['objectid'] : null, 'REQUEST');
 
         if (!empty($objectid)) {
             $eid = $objectid;

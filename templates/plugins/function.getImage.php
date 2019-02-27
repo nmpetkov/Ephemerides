@@ -23,7 +23,7 @@ function smarty_function_getImage($params, Zikula_View $view)
             $result = substr($params['htmlcontent'], $posstart, $posend-$posstart);
             if (isset($params['putbaseurl']) && $params['putbaseurl']) {
                 // put base url, if not
-                if (substr($result, 0, 7) != 'http://' || substr($result, 0, 8) != 'https://') {
+                if (!(substr($result, 0, 7) == 'http://' || substr($result, 0, 8) == 'https://')) {
                     $result = System::getBaseUrl() . ltrim($result, DIRECTORY_SEPARATOR);
                 }
             }
